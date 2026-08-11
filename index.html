@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <!--
+      MOTOR DE OVERLAYS v7 — index.html
+      ─────────────────────────────────
+      Este archivo corre dentro de OBS/Browser Source.
+      NO lo edites a menos que sepas lo que haces.
+
+      FLUJO:
+        1. Cada 1s consulta config.json
+        2. Por cada entrada en el config crea (o actualiza) un <iframe>
+        3. Si una entrada desaparece del config, la capa se oculta con fade y se elimina
+        4. Cuando la plantilla cambia → recarga el iframe completo
+        5. Cuando solo cambia "update" → llama recibirDatos() sin recargar el iframe
+    -->
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: transparent;
+      }
+
+      .layer {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        border: none;
+        background: transparent;
+        opacity: 0;
+        /* Transición suave de entrada y salida */
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+      }
+
+      .layer.visible {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="capas"></div>
+
+    <script>
+      /* ─── Estado en memoria ─────────────────────────────────────── */
+      // capas[id] = { plantilla, update }
+      const capas = {};
+
+      /* ─── Motor principal ───────────────────────────────────────── */
+      async function sincronizar() {
+        let config;
+        try {
+          const res = await fetch(`config.json?_=${Date.now()}`);
+          if (!res.ok) return;
+          config = await res.json();
+        } catch {
+          return; // Sin conexión o JSON roto → ignorar ciclo
+        }
+
+        const idsConfig = Object.keys(config);
+
+        // 1. ELIMINAR capas que ya no están en el config
+        document.querySelectorAll(".layer").forEach((iframe) => {
+          const id = iframe.dataset.id;
+          if (!idsConfig.includes(id)) {
+            iframe.classList.remove("visible");
+            setTimeout(() => {
+              iframe.remove();
+              delete capas[id];
+            }, 550); // Esperar a que termine el fade
+          }
+        });
+
+        // 2. CREAR o ACTUALIZAR capas
+        for (const id of idsConfig) {
+          const info = config[id];
+          if (!info?.plantilla) continue;
+
+          const estado = capas[id];
+          const iframe = document.getElementById(`capa-${id}`);
+
+          // ── Caso A: Misma plantilla, solo cambiaron los datos ──
+          if (estado && estado.plantilla === info.plantilla && iframe) {
+            if (estado.update !== info.update) {
+              estado.update = info.update;
+              // Inyectar datos sin recargar el iframe
+              try {
+                iframe.contentWindow?.recibirDatos?.(info.datos ?? {});
+              } catch {
+                // iframe aún cargando, el onload lo manejará
+              }
+            }
+            continue;
+          }
+
+          // ── Caso B: Nueva capa o cambio de plantilla ──
+          capas[id] = { plantilla: info.plantilla, update: info.update };
+
+          // Ocultar y remover el iframe anterior si existe
+          if (iframe) {
+            iframe.classList.remove("visible");
+            setTimeout(() => iframe.remove(), 550);
+          }
+
+          // Crear nuevo iframe
+          const el = document.createElement("iframe");
+          el.id = `capa-${id}`;
+          el.className = "layer";
+          el.dataset.id = id;
+          // La ruta sigue la convención: /{categoria}/{plantilla}/index.html
+          el.src = `${id}/${info.plantilla}/index.html`;
+
+          el.onload = () => {
+            // Pequeño delay para que el iframe termine de renderizar
+            setTimeout(() => {
+              try {
+                el.contentWindow?.recibirDatos?.(info.datos ?? {});
+              } catch {
+                // Dominio cruzado o iframe sin la función → ignorar
+              }
+              el.classList.add("visible");
+            }, 300);
+          };
+
+          document.getElementById("capas").appendChild(el);
+        }
+      }
+
+      // Primer ciclo inmediato + intervalo de 1 segundo
+      sincronizar();
+      setInterval(sincronizar, 1000);
+    </script>
+  </body>
+</html>

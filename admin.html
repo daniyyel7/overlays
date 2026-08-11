@@ -1,0 +1,1198 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overlay Control</title>
+    <style>
+      :root {
+        --bg: #0e0e11;
+        --surface: #17171c;
+        --s2: #1f1f27;
+        --s3: #28282f;
+        --border: rgba(255, 255, 255, 0.07);
+        --border2: rgba(255, 255, 255, 0.13);
+        --text: #e8e8f0;
+        --muted: #888896;
+        --accent: #5b6af0;
+        --accent-h: #6e7dff;
+        --success: #2ecf7c;
+        --danger: #f04e4e;
+        --warn: #f0a544;
+        --r: 10px;
+        --rlg: 16px;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        font-size: 14px;
+      }
+
+      /* ── SIDEBAR ── */
+      .sidebar {
+        width: 280px;
+        flex-shrink: 0;
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      .sidebar-head {
+        padding: 18px 14px 12px;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+      .sidebar-head-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      /* Chips de categoría */
+      .chip-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .chip {
+        background: var(--s2);
+        border: 1px solid var(--border2);
+        color: var(--muted);
+        border-radius: 20px;
+        padding: 5px 13px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          color 0.15s,
+          border-color 0.15s;
+        white-space: nowrap;
+        user-select: none;
+      }
+      .chip:hover {
+        background: var(--s3);
+        color: var(--text);
+      }
+      .chip.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+
+      /* Lista de presets */
+      .preset-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 10px 8px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border2) transparent;
+      }
+      .preset-list::-webkit-scrollbar {
+        width: 4px;
+      }
+      .preset-list::-webkit-scrollbar-thumb {
+        background: var(--border2);
+        border-radius: 4px;
+      }
+      .preset-empty {
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+        padding: 28px 16px;
+      }
+      .preset-card {
+        background: var(--s2);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 10px 12px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          border-color 0.15s,
+          background 0.15s;
+        position: relative;
+        overflow: hidden;
+      }
+      .preset-card:hover {
+        background: var(--s3);
+        border-color: var(--border2);
+      }
+      .preset-card.active {
+        border-color: var(--success);
+        background: rgba(46, 207, 124, 0.06);
+      }
+      .preset-card.active::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--success);
+        border-radius: 3px 0 0 3px;
+      }
+      .preset-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .preset-label {
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .preset-sub {
+        font-size: 10px;
+        color: var(--muted);
+        margin-top: 1px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .btn-icon {
+        background: none;
+        border: none;
+        color: var(--muted);
+        cursor: pointer;
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        flex-shrink: 0;
+        font-size: 13px;
+        transition:
+          color 0.15s,
+          background 0.15s;
+      }
+      .btn-icon:hover {
+        color: var(--danger);
+        background: rgba(240, 78, 78, 0.1);
+      }
+
+      /* Footer sidebar */
+      .sidebar-foot {
+        padding: 8px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        flex-shrink: 0;
+      }
+
+      /* ── MAIN ── */
+      .main {
+        flex: 1;
+        height: 100vh;
+        overflow-y: auto;
+        padding: 20px 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border2) transparent;
+      }
+      .main::-webkit-scrollbar {
+        width: 4px;
+      }
+      .main::-webkit-scrollbar-thumb {
+        background: var(--border2);
+        border-radius: 4px;
+      }
+
+      .section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--rlg);
+        padding: 18px;
+      }
+      .section-title {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 14px;
+      }
+
+      /* Chips de plantilla */
+      .pla-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 2px;
+      }
+
+      /* Inputs */
+      label {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      input[type="text"],
+      select.field {
+        width: 100%;
+        background: var(--s2);
+        border: 1px solid var(--border2);
+        color: var(--text);
+        padding: 9px 12px;
+        border-radius: var(--r);
+        font-size: 13px;
+        outline: none;
+        transition: border-color 0.15s;
+        margin-bottom: 12px;
+        appearance: none;
+      }
+      input[type="text"]:focus,
+      select.field:focus {
+        border-color: var(--accent);
+      }
+      input::placeholder {
+        color: var(--muted);
+      }
+
+      /* Botones */
+      .btn {
+        width: 100%;
+        padding: 10px 14px;
+        border: none;
+        border-radius: var(--r);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          opacity 0.15s,
+          transform 0.1s;
+        text-align: center;
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        font-size: 14px;
+        padding: 13px;
+      }
+      .btn-primary:hover {
+        background: var(--accent-h);
+      }
+      .btn-secondary {
+        background: var(--s2);
+        color: var(--text);
+        border: 1px solid var(--border2);
+      }
+      .btn-secondary:hover {
+        background: var(--s3);
+      }
+      .btn-danger {
+        background: transparent;
+        color: var(--danger);
+        border: 1px solid rgba(240, 78, 78, 0.25);
+      }
+      .btn-danger:hover {
+        background: rgba(240, 78, 78, 0.08);
+      }
+      .btn-off {
+        background: transparent;
+        color: var(--warn);
+        border: 1px solid rgba(240, 165, 68, 0.25);
+      }
+      .btn-off:hover {
+        background: rgba(240, 165, 68, 0.08);
+      }
+
+      /* Nav versículos */
+      .nav-vers {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 6px;
+      }
+
+      /* Créditos */
+      .area-row {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 6px;
+        align-items: center;
+      }
+      .area-row input {
+        margin-bottom: 0;
+        flex: 1;
+      }
+
+      /* Badge EN VIVO */
+      .live-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        color: var(--success);
+        background: rgba(46, 207, 124, 0.1);
+        border: 1px solid rgba(46, 207, 124, 0.22);
+        border-radius: 20px;
+        padding: 3px 10px;
+      }
+      .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--success);
+        animation: blink 1.4s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      /* ── TOAST ── */
+      #toasts {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        z-index: 9999;
+        pointer-events: none;
+      }
+      .toast {
+        background: var(--s3);
+        border: 1px solid var(--border2);
+        border-radius: var(--r);
+        padding: 10px 15px;
+        font-size: 12px;
+        color: var(--text);
+        pointer-events: all;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transform: translateX(115%);
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        max-width: 300px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+      }
+      .toast.show {
+        transform: translateX(0);
+      }
+      .toast.ok .ti {
+        color: var(--success);
+      }
+      .toast.err .ti {
+        color: var(--danger);
+      }
+      .toast.inf .ti {
+        color: var(--accent);
+      }
+      .ti {
+        font-size: 15px;
+        flex-shrink: 0;
+      }
+
+      /* ── MODAL (solo para acciones destructivas) ── */
+      #modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 8888;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      #modal.on {
+        display: flex;
+      }
+      .modal-box {
+        background: var(--surface);
+        border: 1px solid var(--border2);
+        border-radius: var(--rlg);
+        padding: 26px;
+        max-width: 320px;
+        width: 90%;
+        box-shadow: 0 20px 55px rgba(0, 0, 0, 0.6);
+      }
+      .modal-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .modal-desc {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+      .modal-acts {
+        display: flex;
+        gap: 7px;
+        justify-content: flex-end;
+      }
+      .modal-acts .btn {
+        width: auto;
+        padding: 8px 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-head">
+        <div class="sidebar-head-label">Categoría</div>
+        <div id="cat-chips" class="chip-group"></div>
+      </div>
+
+      <div id="lista-presets" class="preset-list">
+        <p class="preset-empty">Sin presets guardados</p>
+      </div>
+
+      <div class="sidebar-foot">
+        <button class="btn btn-off" onclick="apagarCapa()">
+          ⏹ Quitar capa (OFF)
+        </button>
+        <button
+          class="btn btn-danger"
+          onclick="
+            confirmar(
+              '¿Borrar todos los presets de esta categoría? Esta acción no se puede deshacer.',
+              limpiarPresets,
+            )
+          "
+        >
+          🗑 Limpiar todos los presets
+        </button>
+      </div>
+    </div>
+
+    <div class="main">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 8px;
+        "
+      >
+        <div>
+          <div style="font-size: 19px; font-weight: 700">Overlay Control</div>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 2px">
+            Sistema de capas para streaming
+          </div>
+        </div>
+        <div id="badge-cont"></div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Plantilla</div>
+        <div id="pla-chips" class="pla-chips"></div>
+        <input type="hidden" id="pla" />
+      </div>
+
+      <div class="section" id="box-datos">
+        <div class="section-title" id="datos-section-title">Datos</div>
+        <div id="campos-dinamicos">
+          <label>Línea principal (v1)</label>
+          <input type="text" id="v1" placeholder="Ej: Juan Pérez" />
+          <label>Línea secundaria (v2)</label>
+          <input type="text" id="v2" placeholder="Ej: Director de Adoración" />
+        </div>
+      </div>
+
+      <div class="section" id="box-bible" style="display: none">
+        <div class="section-title">Pasaje bíblico</div>
+        <label>Versión</label>
+        <select id="bib-ver" class="field" onchange="cargarLibros()"></select>
+        <label>Libro</label>
+        <select
+          id="bib-lib"
+          class="field"
+          onchange="cargarCapitulos()"
+        ></select>
+        <label>Capítulo</label>
+        <select id="bib-cap" class="field"></select>
+        <label>Versículo(s) — ej: 3 o 1-5</label>
+        <input type="text" id="bib-range" placeholder="1" />
+        <div class="nav-vers">
+          <button class="btn btn-secondary" onclick="navegarVersiculo(-1)">
+            ◀ Anterior
+          </button>
+          <button class="btn btn-secondary" onclick="navegarVersiculo(1)">
+            Siguiente ▶
+          </button>
+        </div>
+      </div>
+
+      <div class="section" id="box-himnario" style="display: none">
+        <div class="section-title">Contenido de Himnario</div>
+        <label>Versión de Himnario</label>
+        <select
+          id="him-ver"
+          class="field"
+          onchange="cambiarVersionHimnario()"
+        ></select>
+        <label>Seleccionar Himno</label>
+        <select
+          id="him-num"
+          class="field"
+          onchange="cargarPasajesHimno()"
+        ></select>
+        <div class="nav-vers">
+          <button class="btn btn-secondary" onclick="navegarHimnario(-1)">
+            ◀ Anterior
+          </button>
+          <button class="btn btn-secondary" onclick="navegarHimnario(1)">
+            Siguiente ▶
+          </button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" onclick="lanzarLive()">
+        🚀 Lanzar a pantalla
+      </button>
+      <button class="btn btn-secondary" onclick="guardarPreset()">
+        💾 Guardar como preset
+      </button>
+    </div>
+
+    <div id="toasts"></div>
+
+    <div id="modal">
+      <div class="modal-box">
+        <div class="modal-title">¿Confirmar?</div>
+        <div class="modal-desc" id="modal-desc"></div>
+        <div class="modal-acts">
+          <button class="btn btn-secondary" onclick="cerrarModal()">
+            Cancelar
+          </button>
+          <button class="btn btn-danger" id="modal-ok">Confirmar</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ── Estado Global ── */
+      let estructura = {},
+        presetsMemoria = [],
+        bibliaData = [],
+        himnarioData = [];
+      let versiculosActuales = [],
+        himnoPasajesActuales = [];
+      let indiceVersiculo = 0,
+        indiceHimnoPasaje = 0;
+      let catActual = "";
+      let presetActivo = null;
+      let modoEdicion = false;
+
+      /* ── Toast ── */
+      function toast(msg, tipo = "ok") {
+        const icons = { ok: "✓", err: "✕", inf: "ℹ" };
+        const el = document.createElement("div");
+        el.className = `toast ${tipo}`;
+        el.innerHTML = `<span class="ti">${icons[tipo]}</span><span>${msg}</span>`;
+        document.getElementById("toasts").appendChild(el);
+        requestAnimationFrame(() => el.classList.add("show"));
+        setTimeout(() => {
+          el.classList.remove("show");
+          setTimeout(() => el.remove(), 350);
+        }, 2800);
+      }
+
+      /* ── Modal ── */
+      function confirmar(texto, cb) {
+        document.getElementById("modal-desc").textContent = texto;
+        document.getElementById("modal").classList.add("on");
+        document.getElementById("modal-ok").onclick = () => {
+          cerrarModal();
+          cb();
+        };
+      }
+      function cerrarModal() {
+        document.getElementById("modal").classList.remove("on");
+      }
+      document.getElementById("modal").addEventListener("click", (e) => {
+        if (e.target === e.currentTarget) cerrarModal();
+      });
+
+      function badge(label) {
+        const c = document.getElementById("badge-cont");
+        c.innerHTML = label
+          ? `<div class="live-badge"><div class="dot"></div>EN VIVO · ${label}</div>`
+          : `<div style="font-size:11px;color:var(--muted)">Sin capa activa</div>`;
+      }
+
+      /* ── Init ── */
+      async function init() {
+        const res = await fetch("/api/init");
+        estructura = await res.json();
+
+        const cont = document.getElementById("cat-chips");
+        Object.keys(estructura).forEach((c, i) => {
+          const btn = document.createElement("button");
+          btn.className = "chip" + (i === 0 ? " active" : "");
+          btn.textContent = c.charAt(0).toUpperCase() + c.slice(1);
+          btn.dataset.cat = c;
+          btn.onclick = () => seleccionarCat(c, btn);
+          cont.appendChild(btn);
+        });
+
+        await cargarVersionesReales();
+        await cargarVersionesHimnario();
+        catActual = Object.keys(estructura)[0] || "";
+        if (catActual) cambiarCategoria(catActual);
+        badge(null);
+      }
+
+      function seleccionarCat(cat, btn) {
+        document
+          .querySelectorAll("#cat-chips .chip")
+          .forEach((c) => c.classList.remove("active"));
+        btn.classList.add("active");
+        catActual = cat;
+        cambiarCategoria(cat);
+      }
+
+      function cambiarCategoria(cat) {
+        const esHimnario = cat === "himnarios" || cat === "cantos_invencibles";
+
+        document.getElementById("box-bible").style.display =
+          cat === "versiculos" ? "block" : "none";
+        document.getElementById("box-himnario").style.display =
+          esHimnario ? "block" : "none";
+        document.getElementById("box-datos").style.display =
+          cat === "versiculos" || esHimnario ? "none" : "block";
+
+        const plantillas = estructura[cat] || [];
+        const cont = document.getElementById("pla-chips");
+        cont.innerHTML = "";
+        plantillas.forEach((p, i) => {
+          const btn = document.createElement("button");
+          btn.className = "chip" + (i === 0 ? " active" : "");
+          btn.textContent = p;
+          btn.dataset.pla = p;
+          btn.onclick = () => seleccionarPla(p, btn);
+          cont.appendChild(btn);
+        });
+        document.getElementById("pla").value = plantillas[0] || "";
+
+        const dyn = document.getElementById("campos-dinamicos");
+        if (cat === "creditos") {
+          dyn.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <label style="margin:0;">Bloques</label>
+          <button class="btn btn-secondary" onclick="addArea()" style="width:auto;padding:5px 11px;font-size:11px;">+ Añadir</button>
+        </div>
+        <div id="area-list"></div>`;
+          addArea();
+        } else if (cat === "versiculos" || esHimnario) {
+          dyn.innerHTML = "";
+        } else if (cat === "lower_invencibles") {
+          dyn.innerHTML = `
+        <label>Línea principal (v1)</label>
+        <input type="text" id="v1" placeholder="Nombre" />
+        <label>Línea secundaria (v2)</label>
+        <input type="text" id="v2" placeholder="Cargo" />
+      `;
+        } else {
+          dyn.innerHTML = `
+        <label>Línea principal (v1)</label>
+        <input type="text" id="v1" placeholder="Nombre" />
+        <label>Línea secundaria (v2)</label>
+        <input type="text" id="v2" placeholder="Cargo" />
+        <label>Línea adicional (v3)</label>
+        <input type="text" id="v3" placeholder="Participacion" />
+        <label>Línea adicional (v4) - Opcional</label>
+        <input type="text" id="v4" placeholder="Ej: Universidad Linda Vista" />
+      `;
+        }
+
+        if (cat === "cantos_invencibles") {
+          const selVer = document.getElementById("him-ver");
+          if (selVer && Array.from(selVer.options).some((o) => o.value === "cantos_invencibles")) {
+            if (selVer.value !== "cantos_invencibles") {
+              selVer.value = "cantos_invencibles";
+              cambiarVersionHimnario();
+            }
+          }
+        } else if (cat === "himnarios") {
+          const selVer = document.getElementById("him-ver");
+          if (selVer && Array.from(selVer.options).some((o) => o.value === "himnario_adventista")) {
+            if (selVer.value !== "himnario_adventista") {
+              selVer.value = "himnario_adventista";
+              cambiarVersionHimnario();
+            }
+          }
+        }
+
+        cargarPresetsLateral(cat);
+      }
+
+      function seleccionarPla(p, btn) {
+        document
+          .querySelectorAll("#pla-chips .chip")
+          .forEach((c) => c.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("pla").value = p;
+      }
+
+      /* ── Lanzar ── */
+      async function lanzarLive() {
+        const cat = catActual;
+        let datos = {},
+          label = "";
+
+        if (cat === "versiculos") {
+          const ver = document.getElementById("bib-ver").value;
+          const lib = document.getElementById("bib-lib").value;
+          const cap = document.getElementById("bib-cap").value;
+          const ran = document.getElementById("bib-range").value.trim();
+          if (!ver || !lib || !cap)
+            return toast("Selecciona versión, libro y capítulo.", "err");
+
+          const lista = await fetch(`/api/bible/${ver}/${lib}/${cap}`)
+            .then((r) => r.json())
+            .catch(() => []);
+          if (ran.includes("-")) {
+            const [ini, fin] = ran.split("-").map(Number);
+            versiculosActuales = lista.filter(
+              (v) => Number(v.numero) >= ini && Number(v.numero) <= fin,
+            );
+            indiceVersiculo = 0;
+            if (!versiculosActuales.length)
+              return toast("Sin versículos en ese rango.", "err");
+            await actualizarVersiculoEnPantalla();
+            return;
+          } else {
+            const vU = lista.find((v) => v.numero === ran);
+            datos = {
+              v1: vU ? `${vU.numero}. ${vU.texto}` : "",
+              v2: `${lib} ${cap}`,
+            };
+            label = `${lib} ${cap}:${ran}`;
+          }
+        } else if (cat === "himnarios" || cat === "cantos_invencibles") {
+          const ver = document.getElementById("him-ver").value;
+          const num = document.getElementById("him-num").value;
+          if (!ver || !num) return toast("Selecciona versión e himno.", "err");
+
+          himnoPasajesActuales = await fetch(`/api/himnario/${ver}/${num}`)
+            .then((r) => r.json())
+            .catch(() => []);
+          indiceHimnoPasaje = 0;
+          if (!himnoPasajesActuales.length)
+            return toast("El himno no tiene estrofas.", "err");
+          await actualizarHimnarioEnPantalla();
+          return;
+        } else if (cat === "creditos") {
+          const filas = document.querySelectorAll("#area-list .area-row");
+          datos = {
+            lista: Array.from(filas).map((d) => ({
+              area: d.querySelector(".in-a").value,
+              nombres: d
+                .querySelector(".in-n")
+                .value.split(",")
+                .map((n) => n.trim())
+                .filter(Boolean),
+            })),
+          };
+          label = "Créditos";
+        } else {
+          datos = {
+            v1: document.getElementById("v1")?.value?.trim() || "",
+            v2: document.getElementById("v2")?.value?.trim() || "",
+            v3: document.getElementById("v3")?.value?.trim() || "",
+            v4: document.getElementById("v4")?.value?.trim() || "",
+          };
+          label = datos.v1 || cat;
+        }
+
+        await enviarAConfig(cat, datos);
+        badge(label);
+        toast(`🚀 EN PANTALLA: ${label}`, "ok");
+      }
+
+      /* ── Funciones de Versículos ── */
+      async function actualizarVersiculoEnPantalla() {
+        const v = versiculosActuales[indiceVersiculo];
+        const lib = document.getElementById("bib-lib").value;
+        const cap = document.getElementById("bib-cap").value;
+        await enviarAConfig("versiculos", {
+          v1: `${v.numero}. ${v.texto}`,
+          v2: `${lib} ${cap}`,
+        });
+        badge(`${lib} ${cap}:${v.numero}`);
+        toast(`📖 Lanzado: ${lib} ${cap}:${v.numero}`, "ok");
+      }
+
+      function navegarVersiculo(dir) {
+        if (!versiculosActuales.length)
+          return toast("Primero lanza un rango.", "inf");
+        const n = indiceVersiculo + dir;
+        if (n < 0 || n >= versiculosActuales.length) return;
+        indiceVersiculo = n;
+        actualizarVersiculoEnPantalla();
+      }
+
+      /* ── Funciones de Himnario ── */
+      async function actualizarHimnarioEnPantalla() {
+        if (!himnoPasajesActuales || himnoPasajesActuales.length === 0) return;
+        const p = himnoPasajesActuales[indiceHimnoPasaje];
+        await enviarAConfig(catActual, { v1: p.v1, v2: p.v2, tipo: p.tipo });
+        badge(p.identificador);
+        toast(`🎵 Cambiado a: ${p.identificador.replace("Himno ", "")}`, "ok");
+      }
+
+      function navegarHimnario(dir) {
+        if (!himnoPasajesActuales || !himnoPasajesActuales.length)
+          return toast("Primero selecciona un himno.", "inf");
+        const n = indiceHimnoPasaje + dir;
+        if (n < 0 || n >= himnoPasajesActuales.length) return;
+        indiceHimnoPasaje = n;
+        actualizarHimnarioEnPantalla();
+      }
+
+      async function enviarAConfig(cat, datos) {
+        let config = {};
+        try {
+          config = await fetch(`config.json?_=${Date.now()}`).then((r) =>
+            r.json(),
+          );
+        } catch {}
+        config[cat] = {
+          plantilla: document.getElementById("pla").value,
+          datos,
+          update: Date.now(),
+        };
+        await fetch("/api/update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(config),
+        });
+      }
+
+      async function apagarCapa() {
+        let config = {};
+        try {
+          config = await fetch("config.json").then((r) => r.json());
+        } catch {}
+        delete config[catActual];
+        await fetch("/api/update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(config),
+        });
+        badge(null);
+        document
+          .querySelectorAll(".preset-card")
+          .forEach((c) => c.classList.remove("active"));
+        toast(`⏹ Capa "${catActual.toUpperCase()}" removida`, "inf");
+      }
+
+      /* ── Presets ── */
+      async function cargarPresetsLateral(cat) {
+        presetsMemoria = await fetch(`/api/presets/${cat}`).then((r) =>
+          r.json(),
+        );
+        const lista = document.getElementById("lista-presets");
+        lista.innerHTML = "";
+        if (!presetsMemoria.length) {
+          lista.innerHTML = `<p class="preset-empty">Sin presets guardados</p>`;
+          return;
+        }
+        presetsMemoria.forEach((p, i) => {
+          const div = document.createElement("div");
+          div.className = "preset-card";
+          div.innerHTML = `
+        <div class="preset-info">
+          <div class="preset-label">${p.label}</div>
+          <div class="preset-sub">${p.plantilla}</div>
+        </div>
+        <div style="display:flex;gap:4px;">
+          <button class="btn-icon" title="Editar" onclick="editarPreset(${i}, event)">✎</button>
+          <button class="btn-icon" title="Eliminar" onclick="borrarPreset(${i}, event)">✕</button>
+        </div>`;
+          div.addEventListener("click", () => cargarPreset(p, div));
+          lista.appendChild(div);
+        });
+      }
+
+      async function cargarPreset(p, div) {
+        document
+          .querySelectorAll(".preset-card")
+          .forEach((c) => c.classList.remove("active"));
+        div.classList.add("active");
+        document
+          .querySelectorAll("#pla-chips .chip")
+          .forEach((c) =>
+            c.classList.toggle("active", c.dataset.pla === p.plantilla),
+          );
+        document.getElementById("pla").value = p.plantilla;
+
+        if (p.datos.isBible) {
+          document.getElementById("bib-ver").value = p.datos.params.ver;
+          await cargarLibros(p.datos.params.lib);
+          document.getElementById("bib-cap").value = p.datos.params.cap;
+          document.getElementById("bib-range").value = p.datos.params.ran;
+        } else if (p.datos.isHimno) {
+          document.getElementById("him-ver").value = p.datos.params.ver;
+          await cambiarVersionHimnario(p.datos.params.num);
+        } else if (p.datos.lista) {
+          document.getElementById("area-list").innerHTML = "";
+          p.datos.lista.forEach((item) =>
+            addArea(item.area, item.nombres.join(", ")),
+          );
+        } else {
+          if (document.getElementById("v1"))
+            document.getElementById("v1").value = p.datos.v1 || "";
+          if (document.getElementById("v2"))
+            document.getElementById("v2").value = p.datos.v2 || "";
+          if (document.getElementById("v3"))
+            document.getElementById("v3").value = p.datos.v3 || "";
+          if (document.getElementById("v4"))
+            document.getElementById("v4").value = p.datos.v4 || "";
+        }
+      }
+
+      async function guardarPreset() {
+        let datos = {},
+          label = "";
+        const cat = catActual;
+
+        if (cat === "versiculos") {
+          const lib = document.getElementById("bib-lib").value;
+          const cap = document.getElementById("bib-cap").value;
+          const ran = document.getElementById("bib-range").value;
+          label = `${lib} ${cap}:${ran}`;
+          datos = {
+            isBible: true,
+            params: {
+              ver: document.getElementById("bib-ver").value,
+              lib,
+              cap,
+              ran,
+            },
+          };
+        } else if (cat === "himnarios" || cat === "cantos_invencibles") {
+          const ver = document.getElementById("him-ver").value;
+          const num = document.getElementById("him-num").value;
+          if (!ver || !num) return toast("Selecciona versión e himno.", "err");
+          const selElement = document.getElementById("him-num");
+          label = selElement.options[selElement.selectedIndex]?.text || "Himno";
+          datos = { isHimno: true, params: { ver, num } };
+        } else if (cat === "creditos") {
+          const filas = document.querySelectorAll("#area-list .area-row");
+          datos = {
+            lista: Array.from(filas).map((f) => ({
+              area: f.querySelector(".in-a").value,
+              nombres: f
+                .querySelector(".in-n")
+                .value.split(",")
+                .map((n) => n.trim())
+                .filter(Boolean),
+            })),
+          };
+          label = "Créditos";
+        } else {
+          datos = {
+            v1: document.getElementById("v1")?.value?.trim() || "",
+            v2: document.getElementById("v2")?.value?.trim() || "",
+            v3: document.getElementById("v3")?.value?.trim() || "",
+            v4: document.getElementById("v4")?.value?.trim() || "",
+          };
+          label = datos.v1 || cat;
+        }
+
+        const preset = {
+          label,
+          plantilla: document.getElementById("pla").value,
+          datos,
+        };
+
+        if (modoEdicion && presetActivo !== null)
+          presetsMemoria[presetActivo] = preset;
+        else presetsMemoria.push(preset);
+
+        await fetch(`/api/presets/${cat}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(presetsMemoria),
+        });
+
+        modoEdicion = false;
+        presetActivo = null;
+        cargarPresetsLateral(cat);
+        toast("Preset guardado.");
+      }
+
+      function editarPreset(i, e) {
+        e.stopPropagation();
+        presetActivo = i;
+        modoEdicion = true;
+        const cards = document.querySelectorAll(".preset-card");
+        cards.forEach((c) => c.classList.remove("active"));
+        if (cards[i]) cards[i].classList.add("active");
+        cargarPreset(presetsMemoria[i], cards[i]);
+        toast("Modo edición activado.", "inf");
+      }
+
+      async function borrarPreset(i, e) {
+        e.stopPropagation();
+        presetsMemoria.splice(i, 1);
+        await fetch(`/api/presets/${catActual}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(presetsMemoria),
+        });
+        cargarPresetsLateral(catActual);
+        toast("Preset eliminado.", "inf");
+      }
+
+      async function limpiarPresets() {
+        await fetch(`/api/presets/${catActual}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify([]),
+        });
+        cargarPresetsLateral(catActual);
+        toast("Todos los presets eliminados.", "inf");
+      }
+
+      /* ── Biblia ── */
+      async function cargarVersionesReales() {
+        const vers = await fetch("/api/bible/list").then((r) => r.json());
+        const sel = document.getElementById("bib-ver");
+        sel.innerHTML = '<option value="">-- Versión --</option>';
+        vers.forEach(
+          (v) => (sel.innerHTML += `<option value="${v}">${v}</option>`),
+        );
+      }
+
+      async function cargarLibros(pre = null) {
+        const ver = document.getElementById("bib-ver").value;
+        if (!ver) return;
+        bibliaData = await fetch(`/api/bible/${ver}/metadata`).then((r) =>
+          r.json(),
+        );
+        const sel = document.getElementById("bib-lib");
+        sel.innerHTML = '<option value="">-- Libro --</option>';
+        bibliaData.forEach(
+          (l) =>
+            (sel.innerHTML += `<option value="${l.nombre}">${l.nombre}</option>`),
+        );
+        if (pre) {
+          sel.value = pre;
+          await cargarCapitulos();
+        }
+      }
+
+      async function cargarCapitulos(pre = null) {
+        const libro = bibliaData.find(
+          (l) => l.nombre === document.getElementById("bib-lib").value,
+        );
+        const sel = document.getElementById("bib-cap");
+        sel.innerHTML = "";
+        if (libro)
+          for (let i = 1; i <= libro.capitulos; i++)
+            sel.innerHTML += `<option value="${i}">${i}</option>`;
+        if (pre) sel.value = pre;
+      }
+
+      /* ── Himnario ── */
+      async function cargarVersionesHimnario() {
+        try {
+          const versiones = await fetch("/api/himnario/list").then((r) =>
+            r.json(),
+          );
+          const sel = document.getElementById("him-ver");
+          sel.innerHTML = '<option value="">-- Seleccionar Versión --</option>';
+          versiones.forEach(
+            (v) =>
+              (sel.innerHTML += `<option value="${v}">${v.replace(".xml", "")}</option>`),
+          );
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      async function cambiarVersionHimnario(preSelectedHimno = null) {
+        const version = document.getElementById("him-ver").value;
+        const selHimno = document.getElementById("him-num");
+        selHimno.innerHTML =
+          '<option value="">-- Seleccionar Himno --</option>';
+        if (!version) return;
+
+        try {
+          const listaHimnos = await fetch(
+            `/api/himnario/${version}/metadata`,
+          ).then((r) => r.json());
+          listaHimnos.forEach(
+            (h) =>
+              (selHimno.innerHTML += `<option value="${h.numero}">${h.numero} - ${h.titulo}</option>`),
+          );
+          if (preSelectedHimno) {
+            selHimno.value = preSelectedHimno;
+            await cargarPasajesHimno();
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      async function cargarPasajesHimno() {
+        const version = document.getElementById("him-ver").value;
+        const numero = document.getElementById("him-num").value;
+        if (!version || !numero) return;
+        try {
+          himnoPasajesActuales = await fetch(
+            `/api/himnario/${version}/${numero}`,
+          ).then((r) => r.json());
+          indiceHimnoPasaje = 0;
+          await actualizarHimnarioEnPantalla();
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      /* ── Créditos ── */
+      function addArea(a = "", n = "") {
+        const div = document.createElement("div");
+        div.className = "area-row";
+        div.innerHTML = `
+      <input type="text" class="in-a" placeholder="Área" value="${a}" />
+      <input type="text" class="in-n" placeholder="Nombres, separados por coma" value="${n}" />
+      <button class="btn-icon" onclick="this.parentElement.remove()">✕</button>`;
+        document.getElementById("area-list").appendChild(div);
+      }
+
+      init();
+    </script>
+  </body>
+</html>

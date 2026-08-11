@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<style>
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: transparent;
+}
+
+#lower-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+}
+
+/* Canvas donde se dibujan los frames */
+#seq-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+}
+
+/* ─── Bloque de textos ────────────────────────────────────────────
+   ⚠️  Ajusta left / bottom para que los textos
+       queden sobre la zona en blanco de tus PNGs
+   ────────────────────────────────────────────────────────────────*/
+#textos {
+  position: absolute;
+  left:   400px;   /* ← movido a la derecha para evitar los personajes */
+  bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+/* Línea 1 — Nombre / título principal */
+#linea1 {
+  font-family: "Segoe UI", sans-serif;
+  font-size:   42px;
+  font-weight: 800;
+  color:       #ffffff;
+  line-height: 1.1;
+  white-space: nowrap;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.75);
+}
+
+/* Línea 2 — Cargo / subtítulo */
+#linea2 {
+  font-family:    "Segoe UI", sans-serif;
+  font-size:      22px;
+  font-weight:    500;
+  color:          #f5c842;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space:    nowrap;
+  text-shadow:    0 2px 6px rgba(0,0,0,0.75);
+}
+
+</style>
+</head>
+<body>
+
+<div id="lower-wrap">
+  <canvas id="seq-canvas" width="1920" height="1080"></canvas>
+  <div id="textos">
+    <p id="linea1"></p>
+    <p id="linea2"></p>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   ⚙️  CONFIGURACIÓN
+   ════════════════════════════════════════════════════════════════ */
+const CFG = {
+  /* Categoría y plantilla — deben coincidir con las carpetas del proyecto */
+  cat:       "lower_invencibles",
+  plantilla: "invencible",
+
+  fps: 60,
+
+  /* En qué frame aparecen los textos (cuando el gráfico ya terminó de abrir) */
+  textoDesde: 25,
+  /* En qué frame se ocultan (antes del cierre). null = 15 frames antes del fin */
+  textoHasta: 440,
+};
+/* ════════════════════════════════════════════════════════════════ */
+
+const canvas   = document.getElementById("seq-canvas");
+const ctx      = canvas.getContext("2d");
+const elTextos = document.getElementById("textos");
+const elL1     = document.getElementById("linea1");
+const elL2     = document.getElementById("linea2");
+
+let frames   = [];   // Image[] precargadas
+let frameIdx = 0;
+let rafId    = null;
+let lastTs   = null;
+const MS_F   = 1000 / CFG.fps;
+
+/* ── Dibuja el frame actual ── */
+function dibujar(idx) {
+  const img = frames[idx];
+  if (!img || !img.complete || img.naturalWidth === 0) return;
+  ctx.clearRect(0, 0, 1920, 1080);
+  ctx.drawImage(img, 0, 0, 1920, 1080);
+}
+
+/* ── Loop de animación ── */
+function loop(ts) {
+  if (lastTs === null) lastTs = ts;
+  const delta = ts - lastTs;
+
+  if (delta >= MS_F) {
+    lastTs = ts - (delta % MS_F);
+    dibujar(frameIdx);
+
+    const hasta = CFG.textoHasta ?? frames.length; // desaparece con el último frame
+    elTextos.style.opacity =
+      (frameIdx >= CFG.textoDesde && frameIdx < hasta) ? "1" : "0";
+
+    frameIdx++;
+
+    if (frameIdx >= frames.length) {
+      ctx.clearRect(0, 0, 1920, 1080);
+      elTextos.style.opacity = "0";
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      return;
+    }
+  }
+
+  rafId = requestAnimationFrame(loop);
+}
+
+/* ── Inicia la reproducción desde el frame 0 ── */
+function play() {
+  if (rafId) cancelAnimationFrame(rafId);
+  frameIdx = 0;
+  lastTs   = null;
+  elTextos.style.opacity = "0";
+  rafId = requestAnimationFrame(loop);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CARGA DE FRAMES — usa /api/frames para obtener los nombres
+   exactos del filesystem (sin problemas de encoding de espacios)
+   ════════════════════════════════════════════════════════════════ */
+let listo       = false;
+let datosEspera = null;
+
+async function cargarFrames() {
+  /* 1. Obtener lista real de archivos desde el servidor */
+  let archivos;
+  try {
+    const resp = await fetch(`/api/frames/${CFG.cat}/${CFG.plantilla}`);
+    archivos   = await resp.json();
+  } catch (e) {
+    console.error("[SeqLower] ❌ No se pudo obtener la lista de frames:", e);
+    return;
+  }
+
+  if (!archivos.length) {
+    console.error("[SeqLower] ❌ La carpeta assets/frames/ está vacía o no existe.");
+    return;
+  }
+
+  console.log(`[SeqLower] 📁 ${archivos.length} frames encontrados. Cargando…`);
+
+  /* 2. Precargar todas las imágenes usando el endpoint /api/frame
+        que sirve el archivo directamente desde el filesystem.
+        Esto resuelve el problema de espacios en el nombre del archivo. */
+  const baseURL  = `/api/frame/${CFG.cat}/${CFG.plantilla}/`;
+  frames        = new Array(archivos.length);
+  let pendientes = archivos.length;
+  let errores    = 0;
+
+  archivos.forEach((nombre, i) => {
+    const img = new Image();
+    /* encodeURIComponent encode SOLO el nombre del archivo,
+       el resto de la ruta ya está correctamente formateado */
+    img.src = baseURL + encodeURIComponent(nombre);
+
+    img.onload = () => {
+      frames[i] = img;
+      if (--pendientes === 0) onCargaCompleta(errores, archivos.length);
+    };
+    img.onerror = () => {
+      errores++;
+      frames[i] = img; // naturalWidth=0, será saltado en dibujar()
+      if (i === 0) {
+        console.error(`[SeqLower] ❌ Falla el frame 0. URL: ${img.src}`);
+      }
+      if (--pendientes === 0) onCargaCompleta(errores, archivos.length);
+    };
+  });
+}
+
+function onCargaCompleta(errores, total) {
+  if (errores === total) {
+    console.error(`[SeqLower] ❌ TODOS los frames fallaron. Revisa la URL del servidor.`);
+  } else {
+    console.log(`[SeqLower] ✅ Listo. Errores: ${errores}/${total}`);
+  }
+  listo = true;
+  if (datosEspera) {
+    elL1.textContent = datosEspera.v1 ?? "";
+    elL2.textContent = datosEspera.v2 ?? "";
+    play();
+    datosEspera = null;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   INTERFACE CON EL MOTOR PRINCIPAL (index.html)
+   ════════════════════════════════════════════════════════════════ */
+window.recibirDatos = function(datos) {
+  if (!datos || (!datos.v1 && !datos.v2)) return;
+
+  elL1.textContent = datos.v1 ?? "";
+  elL2.textContent = datos.v2 ?? "";
+
+  if (listo) {
+    play();
+  } else {
+    datosEspera = datos;
+  }
+};
+
+/* Arrancar carga al cargar la página */
+cargarFrames();
+</script>
+
+</body>
+</html>

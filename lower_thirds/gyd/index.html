@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Lower Third - Sincronía Total</title>
+    <style>
+      @font-face {
+        font-family: "AdventSans-Logo";
+        src: url("./assets/AdventSans-Logo.otf") format("opentype");
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        font-family: "AdventSans-Logo", sans-serif;
+      }
+
+      .container {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* === ÓVALO === */
+      #ovalo {
+        position: absolute;
+        width: 175px;
+        height: 175px;
+        fill: rgb(143, 189, 234);
+        top: 50%;
+        left: 50%;
+        z-index: 50;
+        transform: translate(-50%, -50%) translate3d(-1048px, 400px, 0px);
+      }
+
+      @keyframes anim-ovalo {
+        0% {
+          transform: translate(-50%, -50%) translate3d(-1048px, 400px, 0px);
+          animation-timing-function: ease-in-out;
+          opacity: 1;
+        }
+        /* Punto de impacto: llega al centro */
+        5% {
+          transform: translate(-50%, -50%) translate3d(0px, 400px, 0px);
+          animation-timing-function: ease;
+          opacity: 1;
+        }
+        /* Retroceso: el punto donde la máscara debe seguirlo */
+        8%,
+        90% {
+          transform: translate(-50%, -50%) translate3d(-810px, 400px, 0px);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -50%) translate3d(-810px, 400px, 0px);
+          opacity: 0;
+        }
+      }
+
+      /* === MÁSCARA DE RECORTE === */
+      #maskContainer {
+        position: absolute;
+        left: 149.948px;
+        top: 879.978px;
+        width: 864px;
+        height: 119.661px;
+        z-index: 10;
+        /* Empezamos con un margen extra (105%) para asegurar que el óvalo cubra el inicio */
+        clip-path: inset(0 0 0 105%);
+      }
+
+      @keyframes anim-mask {
+        0%,
+        5% {
+          clip-path: inset(0 0 0 105%);
+          opacity: 1;
+        }
+        /* Terminamos en -5% para que la máscara "sobrepase" un poco y no deje bordes */
+        8%,
+        83% {
+          clip-path: inset(0 0 0 -5%);
+          opacity: 1;
+        }
+        90%,
+        100% {
+          clip-path: inset(0 0 0 -5%);
+          opacity: 0;
+        }
+      }
+
+      .rect-azul {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(26, 84, 140);
+        border-radius: 75px;
+      }
+
+      .texto1 {
+        position: absolute;
+        width: 720px;
+        font-size: 36px;
+        font-weight: bold;
+        color: white;
+        left: 104.052px;
+        top: 20px;
+        margin: 0;
+      }
+
+      .texto2 {
+        position: absolute;
+        width: 720px;
+        font-size: 28px;
+        font-weight: bold;
+        font-style: italic;
+        color: white;
+        left: 104.052px;
+        top: 72px;
+        margin: 0;
+      }
+
+      /* === LOGO === */
+      #logo_transp {
+        position: absolute;
+        width: 147px;
+        height: 147px;
+        left: 77px;
+        top: 867px;
+        opacity: 0;
+        z-index: 100;
+      }
+
+      @keyframes fade-in-logo {
+        0%,
+        8% {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        9%,
+        90% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        95%,
+        100% {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <img id="logo_transp" src="./assets/logo transp.png" />
+
+    <div id="main-container" class="container">
+      <svg id="ovalo" viewBox="0 0 175 175">
+        <ellipse cx="50%" cy="50%" rx="87" ry="87"></ellipse>
+      </svg>
+
+      <div id="maskContainer">
+        <div class="rect-azul">
+          <p id="Texto1" class="texto1">Texto Principal</p>
+          <p id="texto2" class="texto2">Texto Secundario</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // El receptor universal llama a esta función inyectando el objeto 'datos'
+      window.recibirDatos = function (datos) {
+        console.log("Sincronizando con Master v3:", datos);
+
+        const txt1 = document.getElementById("Texto1");
+        const txt2 = document.getElementById("texto2");
+
+        // Mapeo: v1 (Nombre/Dato 1) y v2 (Cargo/Dato 2)
+        if (txt1) txt1.innerText = datos.v1 || "";
+        if (txt2) txt2.innerText = datos.v2 || "";
+
+        // Disparar tu secuencia de animaciones original
+        iniciarEfectos();
+      };
+
+      // Función compatible para main.js (Soporte Legacy)
+      window.actualizarTexto = function (datos) {
+        window.recibirDatos({ v1: datos.nombre, v2: datos.cargo });
+      };
+
+      function iniciarEfectos() {
+        const elementos = [
+          document.getElementById("ovalo"),
+          document.getElementById("maskContainer"),
+          document.getElementById("logo_transp"),
+        ];
+
+        elementos.forEach((el) => {
+          if (el) {
+            el.style.animation = "none";
+            // Reflow: Fuerza al navegador a reiniciar el ciclo de la animación
+            void el.offsetWidth;
+          }
+        });
+
+        // Re-aplicar tus animaciones CSS
+        document.getElementById("ovalo").style.animation =
+          "anim-ovalo 18s forwards";
+        document.getElementById("maskContainer").style.animation =
+          "anim-mask 18s forwards";
+        document.getElementById("logo_transp").style.animation =
+          "fade-in-logo 18s forwards";
+      }
+    </script>
+  </body>
+</html>

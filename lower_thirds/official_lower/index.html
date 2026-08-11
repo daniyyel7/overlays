@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+
+<style>
+
+/* ═══════════════════════════════════════
+   RESET GENERAL
+   ═══════════════════════════════════════ */
+
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
+body{
+  width:1920px;
+  height:1080px;
+  overflow:hidden;
+  background:transparent;
+  font-family:"Segoe UI",sans-serif;
+}
+
+/* ═══════════════════════════════════════
+   CONTENEDOR PRINCIPAL
+   ═══════════════════════════════════════ */
+
+.lower-third{
+  position:absolute;
+  left:100px;
+  bottom:75px;
+
+  width:900px;
+  height:125px;
+  
+  /* Estado inicial neutral absoluto para evitar cualquier frame viejo */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease, visibility 0.1s ease;
+}
+
+/* El contenedor se activa limpiamente solo bajo esta clase */
+.lower-third.animar {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ═══════════════════════════════════════
+   BARRAS
+   ═══════════════════════════════════════ */
+
+.lt-capa{
+  position:absolute;
+  inset:0;
+
+  border-top-left-radius:50px;
+  border-bottom-right-radius:50px;
+  transform: translateX(-120%); /* Forzado de estado inicial fuera de pantalla */
+}
+
+.lt-capa-1{
+  width:900px;
+  background:#4a90e2;
+}
+
+.lt-capa-2{
+  width:850px;
+  background:#5a62ff;
+}
+
+.lt-capa-3{
+  width:800px;
+  background:#b983ff;
+}
+
+/* ═══════════════════════════════════════
+   LOGO
+   ═══════════════════════════════════════ */
+
+.lt-logo{
+  position:absolute;
+
+  left:0;
+  top:-5px;
+
+  width:125px;
+  height:125px;
+
+  object-fit:cover;
+
+  border-top-left-radius:50px;
+
+  z-index:10;
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* ═══════════════════════════════════════
+   TEXTOS
+   ═══════════════════════════════════════ */
+
+.lt-textos{
+  position:absolute;
+
+  left:140px;
+  top:0;
+
+  width:736px;
+  height:125px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+  color:#fff;
+
+  z-index:10;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.lt-titulo{
+  font-size:34px;
+  font-weight:700;
+}
+
+.lt-subtitulo{
+  font-size:22px;
+  font-style:italic;
+  opacity:.85;
+  margin-top:4px;
+}
+
+/* ═══════════════════════════════════════
+   ANIMACIONES ACTIVES
+   ═══════════════════════════════════════ */
+
+.animar .lt-capa-1{ animation:barraAnim 17s ease forwards; }
+.animar .lt-capa-2{ animation:barraAnim 17s ease .1s forwards; }
+.animar .lt-capa-3{ animation:barraAnim 17s ease .2s forwards; }
+.animar .lt-logo{ animation:logoAnim 17s ease .2s forwards; }
+.animar .lt-textos{ animation:textoAnim 17s ease .2s forwards; }
+
+/* ═══════════════════════════════════════
+   KEYFRAMES BARRAS
+   ═══════════════════════════════════════ */
+
+@keyframes barraAnim{
+  0%{ transform:translateX(-120%); }
+  15%{ transform:translateX(0); }
+  90%{ transform:translateX(0); }
+  100%{ transform:translateX(-120%); }
+}
+
+/* ═══════════════════════════════════════
+   KEYFRAMES LOGO
+   ═══════════════════════════════════════ */
+
+@keyframes logoAnim{
+  0%, 15%{ opacity:0; transform:scale(0); }
+  20%{ opacity:1; transform:scale(1); }
+  80%{ opacity:1; transform:scale(1); }
+  90%, 100%{ opacity:0; transform:scale(0); }
+}
+
+/* ═══════════════════════════════════════
+   KEYFRAMES TEXTOS
+   ═══════════════════════════════════════ */
+
+@keyframes textoAnim{
+  0%, 15%{ opacity:0; transform:translateX(20px); }
+  20%{ opacity:1; transform:translateX(0); }
+  80%{ opacity:1; transform:translateX(0); }
+  90%, 100%{ opacity:0; transform:translateX(20px); }
+}
+
+</style>
+</head>
+<body>
+
+<div id="lower-third" class="lower-third">
+  <div class="lt-capa lt-capa-1"></div>
+  <div class="lt-capa lt-capa-2"></div>
+  <div class="lt-capa lt-capa-3"></div>
+
+  <img class="lt-logo" src="./assets/adventist-symbol--white.png" />
+
+  <div class="lt-textos">
+    <p id="texto-principal" class="lt-titulo">Nombre</p>
+    <p id="texto-secundario" class="lt-subtitulo">Cargo</p>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   RECIBIR DATOS DEL MOTOR
+   ═══════════════════════════════════════ */
+window.recibirDatos = function(datos){
+  const overlay = document.getElementById("lower-third");
+  
+  // Si los datos vienen vacíos (se apagó la capa desde el administrador)
+  if (!datos.v1 && !datos.v2) {
+    overlay.classList.remove("animar");
+    return;
+  }
+
+  // 1. Desmontamos la animación vieja de forma radical y absoluta
+  overlay.classList.remove("animar");
+
+  // 2. Modificamos los contenidos textales en la "oscuridad" total
+  document.getElementById("texto-principal").textContent = datos.v1 ?? "";
+  document.getElementById("texto-secundario").textContent = datos.v2 ?? "";
+
+  // 3. Forzamos Reflow síncrono para romper la persistencia visual del hardware
+  void overlay.offsetWidth;
+
+  // 4. El as bajo la manga: Retrasamos un frame de renderizado del navegador.
+  // Esto garantiza que el motor web limpie el búfer anterior antes de iniciar el ciclo de 20s de nuevo.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.classList.add("animar");
+    });
+  });
+};
+</script>
+</body>
+</html>

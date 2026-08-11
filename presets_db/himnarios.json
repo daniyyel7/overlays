@@ -1,0 +1,13 @@
+[
+    {
+        "label": "9 - Alabemos al Señor",
+        "plantilla": "graduacion_2026",
+        "datos": {
+            "isHimno": true,
+            "params": {
+                "ver": "himnario_adventista",
+                "num": "9"
+            }
+        }
+    }
+]

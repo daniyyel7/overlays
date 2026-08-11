@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Créditos Graduación - Derecha</title>
+
+  <style>
+    @font-face {
+      font-family: "AdventSans";
+      src: url("/resources/fonts/AdventSans-Logo.otf");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 1920px;
+      height: 1080px;
+      background: transparent;
+      overflow: hidden;
+      font-family: "AdventSans", "Segoe UI", sans-serif;
+    }
+
+    .viewport {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 680px;
+      height: 100%;
+      overflow: hidden;
+
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(15, 23, 42, 0.25) 10%,
+        rgba(15, 23, 42, 0.55) 25%,
+        rgba(15, 23, 42, 0.85) 45%,
+        #0f172a 65%,
+        #1e2937 100%
+      );
+
+      opacity: 0;
+      transition: opacity 0.6s ease;
+
+      /* IMPORTANTE */
+      pointer-events: none;
+    }
+
+    .visible {
+      opacity: 1;
+    }
+
+    #scroll-container {
+      position: absolute;
+      right: 80px;
+
+      /* Empieza abajo */
+      top: 1080px;
+
+      width: 520px;
+      text-align: right;
+      color: white;
+
+      will-change: transform;
+    }
+
+    .area-group {
+      margin-bottom: 75px;
+    }
+
+    .title {
+      font-size: 27px;
+      color: #facc15;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+    }
+
+    .names {
+      font-size: 35px;
+      line-height: 1.42;
+      color: #e0f2fe;
+      font-weight: 500;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+
+    /*
+      El scroll ahora termina EXACTAMENTE
+      cuando el último elemento sale completamente.
+    */
+    @keyframes scrollUp {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(calc(-100% - 1400px));
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="viewport" class="viewport">
+    <div id="scroll-container"></div>
+  </div>
+
+  <script>
+    window.recibirDatos = function(datos) {
+      if (datos.lista && Array.isArray(datos.lista)) {
+        iniciarScroll(datos.lista);
+      }
+    };
+
+    function iniciarScroll(lista) {
+
+      const container = document.getElementById("scroll-container");
+      const viewport = document.getElementById("viewport");
+
+      /*
+        RESET COMPLETO
+      */
+      container.innerHTML = "";
+      container.style.animation = "none";
+
+      viewport.classList.remove("visible");
+
+      void container.offsetWidth;
+
+      /*
+        CREAR CONTENIDO
+      */
+      lista.forEach(item => {
+
+        if (!item.area || item.area.trim() === "") return;
+
+        const div = document.createElement("div");
+        div.className = "area-group";
+
+        const nombresHtml = Array.isArray(item.nombres)
+          ? item.nombres.join("<br>")
+          : item.nombres;
+
+        div.innerHTML = `
+          <div class="title">${item.area.toUpperCase()}</div>
+          <div class="names">${nombresHtml}</div>
+        `;
+
+        container.appendChild(div);
+      });
+
+      /*
+        CALCULAR ALTURA REAL
+      */
+      const contenidoAltura = container.scrollHeight;
+
+      /*
+        VELOCIDAD CONSTANTE
+        (más natural para créditos)
+      */
+      const pixelesPorSegundo = 90;
+
+      /*
+        Distancia total:
+        pantalla + contenido
+      */
+      const distanciaTotal = contenidoAltura + 1400;
+
+      const duracion = distanciaTotal / pixelesPorSegundo;
+
+      /*
+        MOSTRAR BANNER
+      */
+      viewport.classList.add("visible");
+
+      /*
+        INICIAR SCROLL
+      */
+      container.style.animation =
+        `scrollUp ${duracion}s linear forwards`;
+
+      /*
+        Cuando el último pixel sale:
+        ocultar INMEDIATAMENTE
+      */
+      container.addEventListener("animationend", () => {
+
+        viewport.classList.remove("visible");
+
+      }, { once: true });
+    }
+  </script>
+
+</body>
+</html>

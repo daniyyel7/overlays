@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  CANTOS INVENCIBLES — Lista de cantos especiales             ║
+  ║                                                              ║
+  ║  Cómo agregar un canto nuevo:                                ║
+  ║                                                              ║
+  ║  <himno numero="X" titulo="Nombre del canto">                ║
+  ║      <estrofas>                                              ║
+  ║          <estrofa numero="1">                                ║
+  ║              <linea>Texto de la línea 1</linea>              ║
+  ║              <linea>Texto de la línea 2</linea>              ║
+  ║          </estrofa>                                          ║
+  ║          <estrofa numero="2">                                ║
+  ║              <linea>Segunda estrofa...</linea>               ║
+  ║          </estrofa>                                          ║
+  ║      </estrofas>                                             ║
+  ║  </himno>                                                    ║
+  ║                                                              ║
+  ║  Cada <estrofa> aparece como una "diapositiva" separada.     ║
+  ║  Máximo 2 <linea> visibles en pantalla al mismo tiempo.      ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<himnario nombre="Cantos Invencibles">
+    <himno numero="1" titulo="CONFIA DIOS NO TE OLVIDA">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Si por causa de tu fe te han abandonado,</linea>
+                <linea>Si por ser leal a Él,de ti se han burlado,</linea>
+                <linea>recuerda las historias del ayer,</linea>
+                <linea>no olvides que tu Dios ha sido fiel.</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Si has pensado en renunciar, por favor detente,</linea>
+                <linea>sigue firme hasta el final, sé en verdad valiente,</linea>
+                <linea>recuerda a los leones y Daniel,</linea>
+                <linea>recuerda aquella a cárcel y José.</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>tu vida está en sus manos,</linea>
+                <linea>en primavera, otoño, invierno y verano.</linea>
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>sigue por fe luchando,</linea>
+                <linea>sigue por fe cantando,</linea>
+                <linea>sigue hoy proclamando que Dios, muy pronto volverá</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>A su tiempo Dios dirá: hijo, es el momento,</linea>
+                <linea>y verás con claridad, serás su instrumento.</linea>
+                <linea>Recuerda que Dios siempre tiene un plan,</linea>
+                <linea>tú solo espera en Él y Él hará.</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>tu vida está en sus manos,</linea>
+                <linea>en primavera, otoño, invierno y verano.</linea>
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>sigue por fe luchando,</linea>
+                <linea>sigue por fe cantando,</linea>
+                <linea>sigue hoy proclamando que Dios, muy pronto volverá</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>No dormirá el que guarda a Israel,</linea>
+                <linea>Él cuidará de ti cual niña de sus ojos.</linea>
+                <linea>No dormirá el que guarda a Israel,</linea>
+                <linea>Él cuidará de ti cual niña de sus ojos</linea>
+            </estrofa>
+            <estrofa numero="7">
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>Tu vida está en sus manos,</linea>
+                <linea>en primavera, otoño, invierno y verano.</linea>
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>sigue por fe luchando,</linea>
+                <linea>sigue por fe cantando,</linea>
+                <linea>sigue hoy proclamando que Dios,</linea>
+                <linea>Muy pronto volverá.</linea>
+                <linea>Muy pronto volverá.</linea>
+                <linea>Muy pronto volverá.</linea>
+            </estrofa>  
+        </estrofas>
+    </himno>
+    <himno numero="2" titulo="CONTRACORRIENTE">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>No tengas miedo de ser diferente</linea>
+                <linea>Aunque se burle y te juzgue la gente</linea>
+                <linea>Nada por fe contracorriente.</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Sé muy valiente, renueva tu mente</linea>
+                <linea>Nunca lo olvides, eres el remanente</linea>
+                <linea>Nada por fe contracorriente.</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>No te conformes con este siglo</linea>
+                <linea>Busca la verdad en el mejor camino</linea>
+                <linea>El que trazó tu mejor amigo el Señor Jesús</linea>
+            </estrofa>
+            <estrofa numero="4">
+               <linea>Y cuando encuentres su voluntad</linea>
+                <linea>Abrázala fuerte y jamás la pierdas</linea>
+                <linea>Pues te dará verdadera paz y felicidad</linea>
+                <linea>Ya no te esfuerces por encajar</linea>
+                <linea>Donde hallarás gran dolor y muerte</linea>
+                <linea>Decide hoy en Jesús brillar</linea>
+                <linea>Nadando contra corriente</linea>
+                <linea>Nadando contra corriente</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>No será fácil cambiar objetivos</linea>
+                <linea>Dejar tus pasiones, ideas, motivos</linea>
+                <linea>Pero tranquilo Dios va contigo</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Dios te dará de sus dones divinos</linea>
+                <linea>Lo notarán familiares y amigos</linea>
+                <linea>Y preguntarán ¿dónde fuiste? O ¿quién vino?</linea>
+            </estrofa>
+            <estrofa numero="7">
+                <linea>No te conformes con este siglo</linea>
+                <linea>Busca la verdad en el mejor camino</linea>
+                <linea>El que trazó tu mejor amigo el señor Jesús</linea>
+            </estrofa>
+            <estrofa numero="8">
+                <linea>Y cuando encuentres su voluntad</linea>
+                <linea>Abrázala fuerte y jamás la pierdas</linea>
+                <linea>Pues te dará verdadera paz y felicidad</linea>
+                <linea>Ya no te esfuerces por encajar</linea>
+                <linea>Donde hallarás gran dolor y muerte</linea>
+                <linea>Decide hoy en Jesús brillar</linea>
+                <linea>Nadando contra corriente</linea>
+                <linea>Nadando contra corriente</linea>
+            </estrofa>
+            <estrofa numero="9">
+                <linea>Y cuando encuentres su voluntad</linea>
+                <linea>Abrázala fuerte y jamás la pierdas</linea>
+            </estrofa>
+            <estrofa numero="10">
+               <linea>Pues te dará verdadera paz y felicidad</linea>
+               <linea>Ya no te esfuerces por encajar</linea>
+               <linea>Donde hallarás gran dolor y muerte</linea>
+               <linea>Decide hoy en Jesús brillar</linea>
+               <linea>Nadando contra corriente</linea>
+               <linea>Nadando contra corriente</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="3" titulo="EL CIELO TE ESPERA">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Hay un lugar para ti en el cielo,</linea>
+                <linea>donde nunca sufrirás de nuevo,</linea>
+                <linea>donde siempre tú serás feliz.</linea>
+            </estrofa>
+            <estrofa numero="2">
+               <linea>Hay un lugar para ti en el cielo,</linea>
+               <linea>no te centres solo en el presente,</linea>
+               <linea>que es brillante nuestro porvenir</linea>
+            </estrofa>
+            <estrofa numero="3">
+               <linea>Fija hoy tus ojos en Cristo,</linea>
+               <linea>que su gloria se refleje en ti,</linea>
+               <linea>que nadie arrebate tu corona,</linea>
+               <linea>que nada te distraiga desde ahora,</linea>
+               <linea>hoy vive la Palabra del Señor,</linea>
+               <linea>predica y ora.</linea>
+            </estrofa>
+            <estrofa numero="4">
+               <linea>El cielo te espera, tienes que ir</linea>
+               <linea>y conocer a Adán y a Eva,</linea>
+               <linea>al gran Daniel, también al rey David,</linea>
+               <linea>El cielo te espera, tienes que ir</linea>
+               <linea>es el momento de alistarse,</linea>
+               <linea>porque Jesús sin lugar a dudas pronto va a venir.</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Sueña con ver a Jesús regresando,</linea>
+                <linea>repitiendo lo que has anhelado:</linea>
+                <linea>“muy bien hecho, siervo bueno y fiel”.</linea>
+            </estrofa>
+            <estrofa numero="6">
+               <linea>Mientras tu sigas aquí esperando,</linea>
+               <linea>no te canses de decirle a otros</linea>
+               <linea>que hay un mundo allá que es más feliz.</linea>
+            </estrofa>
+            <estrofa numero="7">
+               <linea>Fija hoy tus ojos en Cristo,</linea>
+               <linea>que su gloria se refleje en ti,</linea>
+               <linea>que nadie arrebate tu corona,</linea>
+               <linea>que nada te distraiga desde ahora,</linea>
+               <linea>hoy vive la Palabra del Señor,</linea>
+               <linea>predica y ora.</linea>
+            </estrofa>
+            <estrofa numero="8">
+               <linea>El cielo te espera, tienes que ir</linea>
+               <linea>y conocer a Adán y a Eva,</linea>
+               <linea>al gran Daniel, también al rey David,</linea>
+               <linea>El cielo te espera, tienes que ir</linea>
+               <linea>es el momento de alistarse,</linea>
+               <linea>porque Jesús sin lugar a dudas</linea>
+               <linea>pronto va a venir (pronto va a venir)</linea>
+               <linea>pronto va a venir (pronto va a venir)</linea>
+            </estrofa>
+            <estrofa numero="9">
+                <linea>El cielo te espera, tienes que ir</linea>
+                <linea>y conocer a Adán y a Eva,</linea>
+                <linea>al gran Daniel, también al rey David,</linea>
+                <linea>El cielo te espera, tienes que ir</linea>
+                <linea>es el momento de alistarse,</linea>
+                <linea>porque Jesús sin lugar a dudas</linea>
+                <linea>pronto va a venir,</linea>
+                <linea>pronto va a venir</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="4" titulo="TODO POR ÉL">
+        <estrofas>
+            <estrofa numero="1">
+               <linea>Los cielos claman las obras del Eterno</linea>
+               <linea>Galaxias cantan de su inmensidad</linea>
+               <linea>Y una voz con son de gloria</linea>
+               <linea>Resuena en toda creació</linea>
+            </estrofa>
+            <estrofa numero="2">
+               <linea>Al ver brotar la semilla de una flor</linea>
+               <linea>El esplendor de una vida al nacer</linea>
+               <linea>Y una voz con son de gloria</linea>
+               <linea>Resuena en nuestro corazón</linea>
+            </estrofa>
+            <estrofa numero="3">
+               <linea>Delante de Él nos rendimos</linea>
+               <linea>Es todo por Él, todo por Él</linea>
+               <linea>A Él la gloria es para siempre</linea>
+               <linea>Es todo por Él, todo por Él</linea>
+            </estrofa>
+            <estrofa numero="4">
+               <linea>En oración, en su palabra seguiremos</linea>
+               <linea>Un sólo cuerpo rendido a la misión</linea>
+               <linea>Y nuestra voz con son de gloria</linea>
+               <linea>Quebrantará la oscuridad</linea>
+            </estrofa>
+            <estrofa numero="5">
+               <linea>Delante de Él nos rendimos</linea>
+               <linea>Es todo por Él, todo por Él</linea>
+               <linea>A Él la gloria es para siempre</linea>
+               <linea>Es todo por Él, todo por Él</linea>
+            </estrofa>
+            <estrofa numero="6">
+               <linea>A Él sea honra, gloria y loor</linea>
+               <linea>Que el reino del Señor</linea>
+               <linea>Sea en nuestro corazón por siempre</linea>
+            </estrofa>
+            <estrofa numero="7">
+               <linea>A Él sea honra, gloria y loor</linea>
+               <linea>Que el reino del Señor</linea>
+               <linea>Sea en nuestro corazón por siempre</linea>
+            </estrofa>
+            <estrofa numero="8">
+               <linea>A Él sea honra, gloria y loor</linea>
+               <linea>Que el reino del Señor</linea>
+               <linea>Sea en nuestro corazón por siempre</linea>
+            </estrofa>
+            <estrofa numero="9">
+              <linea>Delante de Él nos rendimos</linea>
+              <linea>Es todo por Él, todo por Él</linea>
+              <linea>A Él la gloria es para siempre</linea>
+              <linea>Es todo por Él, todo por Él</linea>
+              <linea>A Él la gloria es para siempre</linea>
+              <linea>Es todo por Él, todo por Él</linea>
+            </estrofa>
+            <estrofa numero="10">
+               <linea>A Él sea honra, gloria y loor</linea>
+               <linea>Que el reino del Señor</linea>
+               <linea>Sea en nuestro corazón por siempre</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="5" titulo="ETERNA ROCA">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Eterna roca es mi Jesús</linea>
+                <linea>Refugio en la tempestad</linea>
+                <linea>Confianza he puesto yo en él</linea>
+                <linea>Refugio en la tempestad</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Roca eterna, nuestra protección</linea>
+                <linea>Nuestra fuerza, nuestro salvador</linea>
+                <linea>Nuestro auxilio en la tribulación</linea>
+                <linea>Consolación en el dolor</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Oh-oh-oh-oh-oh</linea>
+                <linea>Oh-oh-oh-oh-oh</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>Es sombra en día de calor</linea>
+                <linea>Refugio en la tempestad</linea>
+                <linea>Defensa eterna es mi Señor</linea>
+                <linea>Refugio en la tempestad</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Roca eterna, nuestra protección</linea>
+                <linea>Nuestra fuerza, nuestro salvador</linea>
+                <linea>Nuestro auxilio en la tribulación</linea>
+                <linea>Consolación en el dolor</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Oh-oh-oh-oh-oh</linea>
+                <linea>Oh-oh-oh-oh-oh</linea>
+                <linea>Oh-oh-oh-oh-oh</linea>
+            </estrofa>
+            <estrofa numero="7">
+                <linea>Oh, roca eterna, mi Jesús</linea>
+                <linea>Refugio en la tempestad</linea>
+                <linea>Sé tú mi guía, fuerza y luz</linea>
+                <linea>Refugio en la tempestad</linea>
+            </estrofa>
+            <estrofa numero="8">
+                <linea>Roca eterna, nuestra protección</linea>
+                <linea>Nuestra fuerza, nuestro salvador</linea>
+                <linea>Nuestro auxilio en la tribulación</linea>
+                <linea>Consolación en el dolor</linea>
+            </estrofa>
+            <estrofa numero="9">
+                <linea>Oh-oh-oh-oh-oh</linea>
+                <linea>Oh-oh-oh-oh-oh</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="6" titulo="LLEGÓ LA HORA">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Hoy dejaremos de soñar</linea>
+                <linea>Y sin dudar haremos</linea>
+                <linea>Tus sueños realidad</linea>
+                <linea>Hoy en espíritu y verdad</linea>
+                <linea>Te alabaremos</linea>
+                <linea>Sin mirar atrás</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Porque llegó la hora de unir nuestra voz</linea>
+                <linea>Al corazón que late al ritmo de tu pasión</linea>
+                <linea>Aquí estamos, aquí estamos.</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Llegó la hora</linea>
+                <linea>De levantar nuestra voz</linea>
+                <linea>Llegó la hora</linea>
+                <linea>De darte todo el honor</linea>
+                <linea>Porque Dios,</linea>
+                <linea>En ti hay victoria</linea>
+                <linea>Sin temor</linea>
+                <linea>Te damos la gloria</linea>
+                <linea>Llegó la hora</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>Nos diste vida de verdad</linea>
+                <linea>Cambiaste nuestro rumbo</linea>
+                <linea>Nos diste de tu paz</linea>
+                <linea>Hoy no podemos más callar</linea>
+                <linea>Tu evangelio al mundo</linea>
+                <linea>Ya tiene que llegar</linea>
+                <linea>TODA LA ARMONÍA</linea>
+                <linea>Porque llegó la hora de vivir la misión</linea>
+                <linea>Y sin temor llevar a todo el mundo tu amor</linea>
+                <linea>Aquí estamos, aquí estamos.</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Llegó la hora</linea>
+                <linea>De levantar nuestra voz</linea>
+                <linea>Llegó la hora</linea>
+                <linea>De darte todo el honor</linea>
+                <linea>Porque Dios,</linea>
+                <linea>En ti hay victoria</linea>
+                <linea>Sin temor</linea>
+                <linea>Te damos la gloria</linea>
+                <linea>Llegó la hora</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Gloria, gloria aleluya</linea>
+                <linea>Nuestro Dios ya viene a reinar</linea>
+                <linea>Él ya viene a reinar</linea>
+                <linea>Gloria, gloria aleluya</linea>
+                <linea>Ven y reina en este lugar</linea>
+                <linea>Reina en este lugar</linea>
+            </estrofa>
+            <estrofa numero="7">
+                <linea>Gloria, gloria aleluya</linea>
+                <linea>Nuestro Dios ya viene a reinar</linea>
+                <linea>Él ya viene a reinar</linea>
+                <linea>Gloria, gloria aleluya</linea>
+                <linea>Ven y reina en este lugar</linea>
+                <linea>Reina en este lugar</linea>
+            </estrofa>
+            <estrofa numero="8">
+                <linea>Llegó la hora</linea>
+                <linea>De levantar nuestra voz</linea>
+                <linea>Llegó la hora</linea>
+                <linea>De darte todo el honor</linea>
+                <linea>Porque Dios,</linea>
+                <linea>En ti hay victoria</linea>
+                <linea>Sin temor</linea>
+                <linea>Te damos la gloria</linea>
+                <linea>Llegó la hora</linea>
+                <linea>Llegó la hora</linea>
+            </estrofa>
+            <estrofa numero="9">
+               <linea>Gloria, gloria aleluya</linea>
+               <linea>Nuestro Dios ya viene a reinar</linea>
+               <linea>Él ya viene a reina</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="7" titulo="FE EN FUEGO">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Una braza hay profunda en mi</linea>
+                <linea>Solo es una llamita</linea>
+                <linea>Sigue mi fe fuerte y creciendo</linea>
+                <linea>Y no tardará un incendio en arder</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Encender mi fe, mi anhelo es</linea>
+                <linea>Haz de mi pura y santa llama</linea>
+                <linea>Todos podrán ver que arde un fuego en mi</linea>
+                <linea>Encendido por tu nombre y poder</linea>
+                <linea>Comienza a arder</linea>
+                <linea>Enciende mi fe, fe en fuego</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Si tomando una vela </linea>
+                <linea>Enciendes otra </linea>
+                <linea>Y esa otra nace igual </linea>
+                <linea>Al tu notarlo </linea>
+                <linea>El mundo la mostrará</linea>
+                <linea>arderá, brillará con la santa llama</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>Encender mi fe, mi anhelo es</linea>
+                <linea>Haz de mi pura y santa llama</linea>
+                <linea>Todos podrán ver que arde un fuego en mi</linea>
+                <linea>Encendido por tu nombre y poder</linea>
+                <linea>Comienza a arder</linea>
+                <linea>Enciende mi fe, fe en fuego</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Nuestro mensaje al mundo hay que dar</linea>
+                <linea>que enciende a hombres, mujeres,</linea>
+                <linea>niños, niñas</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Encender mi fe, mi anhelo es</linea>
+                <linea>Haz de mi pura y santa llama</linea>
+                <linea>Todos podrán ver que arde un fuego en mi</linea>
+                <linea>Encendido por tu nombre y poder</linea>
+            </estrofa>
+            <estrofa numero="7">
+                 <linea>Encender mi fe, mi anhelo es</linea>
+                 <linea>Haz de mi pura y santa llama</linea>
+                 <linea>Todos podrán ver que arde un fuego en mi</linea>
+                 <linea>Encendido por tu nombre y poder</linea>
+            </estrofa>
+            <estrofa numero="8">
+                <linea>Comienza a arder</linea>
+                <linea>Enciende mi fe, </linea>
+            </estrofa>
+            <estrofa numero="9">
+                <linea>fe en fuego</linea>
+                <linea>fe en fuego</linea>
+            </estrofa>
+            <estrofa numero="10">
+                <linea>Na – Na – Na – Na - Na</linea>
+                <linea>Na – Na – Na – Na - Na</linea>
+                <linea>Na – Na – Na – Na - Na</linea>
+                <linea>Na – Na – Na – Na - Na</linea>
+                <linea>Na – Na – Na – Na - Na</linea>
+                <linea>Na – Na – Na – Na - Na</linea>
+                <linea>Na – Na – Na – Na - Na</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="8" titulo="YO VOY">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>No quiero ser aquel que oye sólo por oír</linea>
+                <linea>En tu Palabra dices que tu amor está en mí</linea>
+                <linea>El sacerdocio es mío si es que por fe lo acepté</linea>
+                <linea>La misión recibí</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>¡Yo voy! ¡Y hoy te llevo al mundo entero!</linea>
+                <linea>¡Yo voy! ¡Pues tu amor no es secreto!</linea>
+                <linea>¡Yo voy! ¡Pues este es tu deseo</linea>
+                <linea>Descienda hoy tu reino! Sólo</linea>
+                <linea>Quiero decir: ¡Yo Voy!</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Quien quiera entender mí fe, mí fe le enseñaré</linea>
+                <linea>¡La gente clama por amor, amor les llevaré!</linea>
+                <linea>¡En mí bautismo nací, recibí el llamado a servir!</linea>
+                <linea>¡Ya pensé y decidí!</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>¡¡Yo voy! ¡Y hoy te llevo al mundo entero!</linea>
+                <linea>¡Yo voy! ¡Pues tu amor no es secreto!</linea>
+                <linea>¡Yo voy! ¡Pues este es tu deseo!</linea>
+                <linea>Descienda hoy tu reino! Sólo</linea>
+                <linea>Quiero decir: ¡Yo Voy!</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>No pienso más en mí, te quiero obedecer</linea>
+                <linea>¡Tu Santo Espíritu en mí, me llena de</linea>
+                <linea>poder!</linea>
+                <linea>¡No tardes más pues tú gloria Señor,</linea>
+                <linea>yo quiero ver!</linea>
+                <linea>No pienso más en mí, te quiero obedecer</linea>
+                <linea>¡Tu Santo Espíritu en mí, me llena de poder!</linea>
+                <linea>¡No tardes más pues tú gloria Señor,</linea>
+                <linea>yo quiero ver!</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>¡Yo voy! ¡Y hoy te llevo al mundo entero!</linea>
+                <linea>¡Yo voy! ¡Pues tu amor no es secreto!</linea>
+                <linea>¡Yo voy! ¡Pues este es tu deseo!</linea>
+                <linea>¡Descienda hoy tu reino!</linea>
+                <linea>Sólo quiero decir:</linea>
+            </estrofa>
+             <estrofa numero="7">
+                <linea>¡Yo voy! ¡Y hoy te llevo al mundo entero!</linea>
+                <linea>¡Yo voy! ¡Pues tu amor no es secreto!</linea>
+                <linea>¡Yo voy! ¡Pues este es tu deseo!</linea>
+                <linea>¡Descienda hoy tu reino!</linea>
+                <linea>Sólo quiero decir:</linea>
+            </estrofa>
+             <estrofa numero="8">
+                <linea>¡Yo Voy!</linea>
+                <linea>Sólo quiero decir: ¡Yo Voy!</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="9" titulo="BUSCAS">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Buscas corazones que no teman ir</linea>
+                <linea>Al campo de batalla</linea>
+                <linea>Buscas vidas dedicadas a servir</linea>
+                <linea>Que amen tu palabra</linea>
+                <linea>Buscas luces en la oscuridad</linea>
+                <linea>Que no tengan miedo de brillar</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Porque la mies en verdad es mucha</linea>
+                <linea>Y no tengo excusas para decir no</linea>
+                <linea>Si me llamaste a ser ese que tu buscas</linea>
+                <linea>Que no tiene dudas de la decisión</linea>
+                <linea>De entregar de nuevo el corazón</linea>
+                <linea>A tu misión</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Buscas a los que se entregan de verdad</linea>
+                <linea>Y no a los mejores</linea>
+                <linea>Buscas a los que comparten sin dudar</linea>
+                <linea>Tus grandes bendiciones</linea>
+                <linea>Buscas luces en la oscuridad</linea>
+                <linea>Que no tengan miedo de brillar</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>Porque la mies en verdad es mucha</linea>
+                <linea>Y no tengo excusas para decir no</linea>
+                <linea>Si me llamaste a ser ese que tu buscas</linea>
+                <linea>Que no tiene dudas de la decisión</linea>
+                <linea>De entregar de nuevo el corazón</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Porque la mies en verdad es mucha</linea>
+                <linea>Y no tengo excusas para decir no</linea>
+                <linea>Si me llamaste a ser ese que tu buscas</linea>
+                <linea>Que no tiene dudas de la decisión</linea>
+                <linea>De entregar de nuevo el corazón</linea>
+                <linea>A tu misión Voy</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="10" titulo="DIOS TU NOMBRE EXALTARÉ">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Dios tu nombre exaltaré</linea>
+                <linea>Pues yo canto tus bondades</linea>
+                <linea>Yo contigo soy feliz</linea>
+                <linea>Te doy gracias por salvarme</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Del cielo viniste tú</linea>
+                <linea>A redimir</linea>
+                <linea>Desde la tierra a la cruz</linea>
+                <linea>A perdonar</linea>
+                <linea>De la cruz a morir</linea>
+                <linea>De morir a la luz</linea>
+                <linea>Dios tu nombre exaltaré</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Dios tu nombre exaltaré</linea>
+                <linea>Pues yo canto tus bondades</linea>
+                <linea>Yo contigo soy feliz</linea>
+                <linea>Te doy gracias por salvarme</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>Del cielo viniste tú</linea>
+                <linea>A redimir</linea>
+                <linea>Desde la tierra a la cruz</linea>
+                <linea>A perdonar</linea>
+                <linea>De la cruz a morir</linea>
+                <linea>De morir a la luz</linea>
+                <linea>Dios tu nombre exaltaré</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Del cielo viniste tú</linea>
+                <linea>A redimir</linea>
+                <linea>Desde la tierra a la cruz</linea>
+                <linea>A perdonar</linea>
+                <linea>De la cruz a morir</linea>
+                <linea>De morir a la luz</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Dios tu nombre exaltaré</linea>
+                <linea>Dios tu nombre exaltaré</linea>
+                <linea>Dios tu nombre exaltaré</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="11" titulo="MI PASTOR">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Contigo ando muy segura</linea>
+                <linea>El mal alejas con amor</linea>
+                <linea>Soy una oveja y procuro</linea>
+                <linea>Los cuidados del Pastor</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Y si yo ando en valle de sombra y de muerte</linea>
+                <linea>Por el valle de sombra de muerte, no temeré ningún mal</linea>
+                <linea>Pues sé que donde yo esté tu bondad me seguirá</linea>
+                <linea>Donde esté tu bondad me seguirá, tubendición me darás</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Mi Pastor me lleva a lugares altos</linea>
+                <linea>Agua limpia beberé</linea>
+                <linea>Y en pastos verdes descansaré</linea>
+                <linea>La jornada seguiré, con Él</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>Contigo ando muy seguro</linea>
+                <linea>El mal alejas con amor</linea>
+                <linea>Soy una oveja y procuro</linea>
+                <linea>Los cuidados del Pastor</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Y si yo ando en valle de sombra y de muerte</linea>
+                <linea>Por el valle de sombra de muerte, no temeré ningún mal</linea>
+                <linea>Pues sé que donde yo esté tu bondad me seguirá</linea>
+                <linea>Donde esté tu bondad me seguirá, tu</linea>
+                <linea>bendición me darás</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Mi Pastor me lleva a lugares altos</linea>
+                <linea>Agua limpia beberé</linea>
+                <linea>Y en pastos verdes descansaré</linea>
+                <linea>La jornada seguiré</linea>
+            </estrofa>
+            <estrofa numero="7">
+                <linea>Y si yo ando en valle de sombra demuerte</linea>
+                <linea>Por el valle de sombra de muerte, no temeré ningún mal</linea>
+                <linea>Pues sé que donde yo esté tu bondad me seguirá</linea>
+                <linea>Donde esté tu bondad me seguirá, tu</linea>
+                <linea>bendición me darás</linea>
+            </estrofa>
+            <estrofa numero="8">
+                <linea>Mi Pastor me lleva a lugares altos</linea>
+                <linea>Agua limpia beberé</linea>
+                <linea>Y en pastos verdes descansaré</linea>
+                <linea>La jornada seguiré</linea>
+            </estrofa>
+            <estrofa numero="9">
+                <linea>Mi Pastor me lleva a lugares altos</linea>
+                <linea>Agua limpia beberé</linea>
+                <linea>Y en pastos verdes descansaré</linea>
+                <linea>La jornada seguiré, con Él, con Él</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="12" titulo="AL LADO DE JESÚS">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>La vida es dura lo sé bien</linea>
+                <linea>Los problemas nublan tu fe</linea>
+                <linea>Mas hay una opción para estar bien</linea>
+                <linea>Escucha lo que te diré</linea>
+                <linea>Cristo es luz para tu caminar</linea>
+                <linea>Esta dispuesto ha atender tu ansiedad</linea>
+                <linea>Te da amor, te da paz</linea>
+                <linea>Y te da fuerzas al luchar</linea>
+                <linea>Es puerto seguro para descansar</linea>
+                <linea>Es el buen pastor que da seguridad</linea>
+                <linea>Oh uh oh</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Siempre es tu amigo fiel</linea>
+                <linea>Es manantial para tu ser</linea>
+                <linea>No hay nada que temer</linea>
+                <linea>Si vas al lado de Jesús</linea>
+                <linea>El cambiará tu actitud</linea>
+                <linea>El es vida, es la luz</linea>
+                <linea>Mira siempre hacia La Cruz</linea>
+                <linea>Camina al lado de Jesús</linea>
+                <linea>Laralala laralalalala</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Es la solución para tu malestar</linea>
+                <linea>Es el remedio que puede sanar</linea>
+                <linea>El bello tesoro que puedes hallar</linea>
+                <linea>Camina al lado de Jesús</linea>
+                <linea>Le da sabor a tu amargo vivir</linea>
+                <linea>Es la razón de poder sonreír</linea>
+                <linea>Con Él tu puedes ser feliz</linea>
+                <linea>Camina al lado de Jesús</linea>
+                <linea>Es puerto seguro para descansar</linea>
+                <linea>Es el buen pastor que da seguridad</linea>
+                <linea>Oh oh oh</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>Siempre es tu amigo fiel</linea>
+                <linea>Es manantial para tu ser</linea>
+                <linea>No hay nada que temer</linea>
+                <linea>Si vas al lado de Jesús</linea>
+                <linea>El cambiará tu actitud</linea>
+                <linea>El es vida, es la luz</linea>
+                <linea>Mira siempre hacia La Cruz</linea>
+                <linea>Camina al lado de Jesús</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Siempre es tu amigo fiel</linea>
+                <linea>Es manantial para tu ser</linea>
+                <linea>No hay nada que temer</linea>
+                <linea>Si vas al lado de Jesús</linea>
+                <linea>El cambiará tu actitud</linea>
+                <linea>El es vida, es la luz</linea>
+                <linea>Mira siempre hacia La Cruz</linea>
+                <linea>Camina al lado de Jesús</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Laralala (Laralalalala)</linea>
+                <linea>Laralala (Laralalalala)</linea>
+                <linea>Camina al lado de Jesús</linea>
+                <linea>Laralala (Laralalalala)</linea>
+                <linea>Camina al lado de Jesús</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="13" titulo="MARANATA">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Tenemos un llamado</linea>
+                <linea>Y un mensaje a predicar</linea>
+                <linea>Palabra poderosa</linea>
+                <linea>Que vidas puede transformar</linea>
+                <linea>Es nuestro privilegio</linea>
+                <linea>Servir cumpliendo la misión</linea>
+                <linea>Llevando esperanza</linea>
+                <linea>A toda tribu y nación</linea>
+                <linea>Toda tribu y nación</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Maranata, maranata</linea>
+                <linea>Ya muy pronto Jesús volverá</linea>
+                <linea>Maranata, maranata</linea>
+                <linea>Ya muy pronto Jesús volverá</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Temed a Dios y dadle</linea>
+                <linea>La honra, gloria y honor</linea>
+                <linea>Porque llegó la hora</linea>
+                <linea>De su juicio de amor</linea>
+                <linea>Es nuestro privilegio</linea>
+                <linea>A todo el mundo anunciar</linea>
+                <linea>El evangelio eterno</linea>
+                <linea>Decir que Cristo volverá</linea>
+                <linea>Que muy pronto volverá</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>Maranata, maranata</linea>
+                <linea>Ya muy pronto Jesús volverá</linea>
+                <linea>Maranata, maranata</linea>
+                <linea>Ya muy pronto Jesús volverá</linea>
+            </estrofa>
+
+            <estrofa numero="5">
+                <linea>Trabajando en unión</linea>
+                <linea>Anunciando salvación</linea>
+                <linea>La aurora llegará</linea>
+                <linea>Y tu luz alumbrará</linea>
+                <linea>Tu Palabra es alimento</linea>
+                <linea>De promesa y cumplimiento</linea>
+                <linea>La aurora llegará, y tu luz alumbrará</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Trabajando en unión</linea>
+                <linea>Anunciando salvación</linea>
+                <linea>La aurora llegará</linea>
+                <linea>Y tu luz alumbrará</linea>
+                <linea>Tu Palabra es alimento</linea>
+                <linea>De promesa y cumplimiento</linea>
+                <linea>La aurora llegará, y tu luz alumbrará</linea>
+                <linea>Y tu luz alumbrará</linea>
+            </estrofa>
+            <estrofa numero="7">
+                <linea>Maranata, maranata</linea>
+                <linea>Ya muy pronto Jesús volverá</linea>
+                <linea>Maranata, maranata</linea>
+                <linea>Ya muy pronto Jesús volverá</linea>
+                <linea>Maranata, maranata</linea>
+                <linea>Ya muy pronto Jesús volverá</linea>
+                <linea>Maranata, maranata</linea>
+                <linea>Ya muy pronto Jesús volverá</linea>
+            </estrofa>
+            <estrofa numero="8">
+                <linea>Ya muy pronto Jesús volverá</linea>
+                <linea>Ya muy pronto Jesús volverá</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="14" titulo="POR LA GRACIA DE DIOS">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Conquistador yo soy</linea>
+                <linea>Sigo los pasos de mi Señor</linea>
+                <linea>Dónde Cristo me envíe yo voy</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Fielmente iré con Dios</linea>
+                <linea>Siempre cumpliendo la misión</linea>
+                <linea>Que El Señor nos dejó</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Por la gracia de Dios seré</linea>
+                <linea>Puro bondadoso y leal</linea>
+                <linea>Guardaré la ley del conquistador</linea>
+                <linea>Seré siervo de Dios</linea>
+                <linea>Y amigo de todos yo seré</linea>
+                <linea>Oh uh oh oh Por la gracia de Dios</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>Con fe y con pasión</linea>
+                <linea>Al servicio de mi Señor</linea>
+                <linea>Caminando con Cristo estoy</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Por la gracia de Dios seré</linea>
+                <linea>Puro bondadoso y leal</linea>
+                <linea>Guardaré la ley del conquistador</linea>
+                <linea>Seré siervo de Dios</linea>
+                <linea>Y amigo de todos yo seré</linea>
+                <linea>Oh uh oh oh Por la gracia de Dios</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Maranatha ¡Cristo viene!</linea>
+                <linea>Maranatha ¡Cristo viene!</linea>
+            </estrofa>
+            <estrofa numero="7">
+                <linea>Por la gracia de Dios seré</linea>
+                <linea>Puro bondadoso y leal</linea>
+                <linea>Guardaré la ley del conquistador</linea>
+                <linea>Seré siervo de Dios</linea>
+                <linea>Y amigo de todos yo seré</linea>
+                <linea>Oh uh oh oh Por la gracia de Dios</linea>
+                <linea>Oh uh oh oh Por la gracia de Dios</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+    <himno numero="15" titulo="DAME FE">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>Si por causa de tu fe te han abandonado,</linea>
+                <linea>si por ser leal a Él,de ti se han burlado,</linea>
+                <linea>recuerda las historias del ayer,</linea>
+                <linea>no olvides que tu Dios ha sido fiel.</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Si has pensado en renunciar, por favor detente,</linea>
+                <linea>sigue firme hasta el final, sé en verdad valiente,</linea>
+                <linea>recuerda a los leones y Daniel,</linea>
+                <linea>recuerda aquella a cárcel y José.</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>tu vida está en sus manos,</linea>
+                <linea>en primavera, otoño, invierno y verano.</linea>
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>sigue por fe luchando,</linea>
+                <linea>sigue por fe cantando,</linea>
+                <linea>sigue hoy proclamando que Dios, muy pronto volverá.</linea>
+            </estrofa>
+            <estrofa numero="4">
+                <linea>A su tiempo Dios dirá: hijo, es el momento,</linea>
+                <linea>y verás con claridad, serás su instrumento.</linea>
+                <linea>Recuerda que Dios siempre tiene un plan,</linea>
+                <linea>tú solo espera en Él y Él hará.</linea>
+            </estrofa>
+            <estrofa numero="5">
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>tu vida está en sus manos,</linea>
+                <linea>en primavera, otoño, invierno y verano.</linea>
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>sigue por fe luchando,</linea>
+                <linea>sigue por fe cantando,</linea>
+                <linea>sigue hoy proclamando que Dios, muy pronto volverá.</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>No dormirá el que guarda a Israel,</linea>
+                <linea>Él cuidará de ti cual niña de sus ojos</linea>
+            </estrofa>
+            <estrofa numero="7">
+                <linea>No dormirá el que guarda a Israel,</linea>
+                <linea>Él cuidará de ti cual niña de sus ojos</linea>
+            </estrofa>
+            <estrofa numero="8">
+                <linea>Confía, Dios no te olvida,</linea>
+            </estrofa>
+            <estrofa numero="9">
+                <linea>Tu vida está en sus manos,</linea>
+                <linea>en primavera, otoño, invierno y verano.</linea>
+                <linea>Confía, Dios no te olvida,</linea>
+                <linea>sigue por fe luchando,</linea>
+                <linea>sigue por fe cantando,</linea>
+                <linea>sigue hoy proclamando que Dios,</linea>
+                <linea>Muy pronto volverá.</linea>
+                <linea>Muy pronto volverá.</linea>
+                <linea>Muy pronto volverá.</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
+</himnario>

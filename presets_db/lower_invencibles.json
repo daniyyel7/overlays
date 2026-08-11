@@ -1,0 +1,22 @@
+[
+    {
+        "label": "ASD",
+        "plantilla": "invencible",
+        "datos": {
+            "v1": "ASD",
+            "v2": "23423",
+            "v3": "",
+            "v4": ""
+        }
+    },
+    {
+        "label": "ASD2",
+        "plantilla": "invencible",
+        "datos": {
+            "v1": "ASD2",
+            "v2": "23423",
+            "v3": "",
+            "v4": ""
+        }
+    }
+]

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Lower Third Formal v4</title>
+    <style>
+      /* FUENTE PERSONALIZADA */
+      @font-face {
+        font-family: "AdventSans-Logo";
+        src: url("./assets/AdventSans-Logo.otf") format("opentype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+
+      .container {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* === RECTÁNGULOS (Sin rebote, frenado suave) === */
+      .gwd-rect-pdcw {
+        position: absolute;
+        background-color: rgb(139, 182, 188);
+        border-bottom-right-radius: 50px;
+        border-bottom-left-radius: 50px;
+        height: 55px;
+        left: 184px;
+        top: 919px;
+        width: 0px;
+        opacity: 0;
+        transform-origin: left center;
+        /* Cubic-bezier para entrada elegante sin rebote */
+        animation: formal-rect-abajo 9s cubic-bezier(0.25, 1, 0.5, 1) 0.3s
+          forwards;
+      }
+
+      .gwd-rect-b095 {
+        position: absolute;
+        background-color: rgb(124, 50, 6);
+        border-radius: 50px 50px 50px 0px;
+        height: 70px;
+        left: 218px;
+        top: 850px;
+        width: 0px;
+        opacity: 0;
+        transform-origin: left center;
+        /* Cubic-bezier para entrada elegante sin rebote */
+        animation: formal-rect-arriba 9.4s cubic-bezier(0.25, 1, 0.5, 1) 0.1s
+          forwards;
+      }
+
+      /* === LOGO === */
+      .gwd-image-1tn2 {
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        left: 28px;
+        top: 703px;
+        opacity: 0;
+        animation: formal-fade 10.5s ease-out forwards;
+      }
+
+      /* === TEXTOS (Tamaños corregidos) === */
+      .texto-base {
+        position: absolute;
+        color: white;
+        font-family: "AdventSans-Logo", sans-serif;
+        margin: 0;
+        opacity: 0;
+        white-space: nowrap;
+        font-style: italic;
+        animation: formal-texto 6.4s cubic-bezier(0.25, 1, 0.5, 1) 1.6s forwards;
+      }
+
+      #Texto1 {
+        left: 354px;
+        top: 858px;
+        width: 830px;
+        font-size: 36px;
+        font-weight: bold;
+      }
+
+      #texto2 {
+        left: 354px;
+        top: 924px;
+        width: 830px;
+        font-size: 28px;
+        font-weight: normal;
+      }
+
+      /* === KEYFRAMES FORMALES === */
+
+      @keyframes formal-rect-arriba {
+        0% {
+          width: 0px;
+          opacity: 0;
+        }
+        12% {
+          width: 1200px;
+          opacity: 1;
+        }
+        88% {
+          width: 1200px;
+          opacity: 1;
+        }
+        100% {
+          width: 0px;
+          opacity: 0;
+        }
+      }
+
+      @keyframes formal-rect-abajo {
+        0% {
+          width: 0px;
+          opacity: 0;
+        }
+        12% {
+          width: 1000px;
+          opacity: 1;
+        }
+        88% {
+          width: 1000px;
+          opacity: 1;
+        }
+        100% {
+          width: 0px;
+          opacity: 0;
+        }
+      }
+
+      @keyframes formal-fade {
+        0% {
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes formal-texto {
+        0% {
+          opacity: 0;
+          transform: translateX(-10px);
+        }
+        10% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        90% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(5px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="abajo" class="gwd-rect-pdcw"></div>
+      <div id="arriba" class="gwd-rect-b095"></div>
+
+      <img src="./assets/semana de oración.png" class="gwd-image-1tn2" />
+
+      <p id="Texto1" class="texto-base">Texto Principal</p>
+      <p id="texto2" class="texto-base">Subtexto Informativo</p>
+    </div>
+
+    <script>
+      // Esta función es la que "escucha" al main.js
+      window.actualizarTexto = function (datos) {
+        // Asegúrate que los IDs coincidan con tus <div> o <span>
+        if (document.getElementById("nombre")) {
+          document.getElementById("nombre").innerText = datos.nombre;
+        }
+        if (document.getElementById("cargo")) {
+          document.getElementById("cargo").innerText = datos.cargo;
+        }
+
+        // Si tu plantilla tiene una función para iniciar la animación, llámala aquí
+        if (typeof iniciar === "function") {
+          iniciar();
+        }
+      };
+    </script>
+  </body>
+</html>

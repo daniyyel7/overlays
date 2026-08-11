@@ -1,0 +1,27 @@
+{
+  "name": "cintillasofficial",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moises5970/ovelay_ulv.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Moises5970/ovelay_ulv/issues"
+  },
+  "homepage": "https://github.com/Moises5970/ovelay_ulv#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14",
+    "xml2js": "^0.6.2"
+  }
+}

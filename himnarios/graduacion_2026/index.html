@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>himnario graduacion 2026</title>
+    <style>
+      @font-face {
+        font-family: AdventSans;
+        src: url("./assets/AdventSans-Logo.otf");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      /* Base para el lienzo */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 1920px;
+        height: 1080px;
+        background-color: transparent;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
+      }
+
+      .canvas {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+
+      /* ── CAPA FIXED PARA EL VIDEO ── */
+      .contenedor-video-fijo {
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        width: 1920px;
+        height: 255px;
+        z-index: 1;
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      
+      .contenedor-video-fijo.visible {
+        opacity: 1;
+      }
+
+      .vid-lower {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: bottom;
+      }
+
+      /* ── CAPA DINÁMICA PARA EL TEXTO ── */
+      .conten-hym-texto {
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        width: 1920px;
+        height: 255px;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; 
+      }
+
+      .capa-text {
+        width: 100%;
+        padding: 0 80px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .line-text {
+        color: white;
+        font-size: 50px; 
+        font-weight: 600;
+        line-height: 1.3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        
+        /* Estado base: invisible */
+        opacity: 0;
+        will-change: opacity;
+      }
+
+      /* ── KEYFRAMES DE ENTRADA Y SALIDA ── */
+      @keyframes e-letra {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      @keyframes s-letra {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      /* Clases dinámicas de Entrada (Fade In) */
+      .entrada-l1 {
+        animation: e-letra 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      }
+      .entrada-l2 {
+        animation: e-letra 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      }
+
+      /* Clases dinámicas de Salida (Fade Out) - Corren en 0.5s en paralelo */
+      .salida-lenta {
+        animation: s-letra 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas">
+      
+      <div id="wrapper-video" class="contenedor-video-fijo">
+        <video
+          id="bg-video"
+          src="./assets/himnario.webm" 
+          class="vid-lower"
+          autoplay
+          loop
+          muted
+          playsinline
+        ></video>
+      </div>
+
+      <div id="wrapper-texto" class="conten-hym-texto">
+        <div class="capa-text">
+          <div id="l1" class="line-text"></div>
+          <div id="l2" class="line-text"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      window.recibirDatos = function (datos) {
+        const wrapperVideo = document.getElementById("wrapper-video");
+        const wrapperTexto = document.getElementById("wrapper-texto");
+        const l1 = document.getElementById("l1");
+        const l2 = document.getElementById("l2");
+
+        // 1. Apagado total (OFF)
+        if (!datos.v1 && !datos.v2) {
+          l1.className = "line-text salida-lenta";
+          l2.className = "line-text salida-lenta";
+          wrapperVideo.classList.remove("visible");
+          return;
+        }
+
+        // 2. Si ya hay texto visible en la pantalla, disparamos el Fade Out animado primero
+        if (l1.classList.contains("entrada-l1") || l2.classList.contains("entrada-l2")) {
+          
+          // Cambiamos las clases a salida lenta
+          l1.className = "line-text salida-lenta";
+          l2.className = "line-text salida-lenta";
+          
+          // Esperamos exactamente 500ms a que termine el Fade Out antes de montar el nuevo texto
+          setTimeout(() => inyectarNuevoTexto(datos, wrapperVideo, wrapperTexto, l1, l2), 500);
+        } else {
+          // Si la pantalla estaba vacía, inyección directa
+          inyectarNuevoTexto(datos, wrapperVideo, wrapperTexto, l1, l2);
+        }
+      };
+
+      function inyectarNuevoTexto(datos, wrapperVideo, wrapperTexto, l1, l2) {
+        wrapperVideo.classList.add("visible");
+
+        // Reemplazamos las letras en la total oscuridad
+        l1.innerText = datos.v1 || "";
+        l2.innerText = datos.v2 || "";
+
+        // Limpiamos las clases de salida y preparamos las de entrada
+        l1.className = "line-text";
+        l2.className = "line-text";
+
+        // Forzamos Reflow síncrono para que el navegador registre el cambio de clases
+        void wrapperTexto.offsetWidth;
+
+        // Encendemos las animaciones de Fade In suave
+        if (datos.v1) l1.classList.add("entrada-l1");
+        if (datos.v2) l2.classList.add("entrada-l2");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+
+*.txt
+
+/estructuras
+
+*.rar
+
+/dist
+
+/node_modules
+
+/*.mov
+*.mov

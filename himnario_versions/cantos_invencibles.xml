@@ -1009,4 +1009,32 @@
             </estrofa>
         </estrofas>
     </himno>
+     <himno numero="17" titulo="GUION APERTURA">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>pastor hemos traído este tesoro.</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Lo encontramos muy lejos de aquí...</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Pero en el camino descubrimos que no era solamente nuestro.</linea>
+            </estrofa>
+            <estrofa numero="4">
+              <linea>Atravesamos selvas, ríos, montañas, ciudades...</linea>
+            </estrofa>
+            <estrofa numero="5">
+               <linea>Y en cada lugar encontramos a alguien dispuesto a ayudarnos.</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Lo trajimos para ustedes.</linea>
+            </estrofa>
+            <estrofa numero="7">
+                <linea>Para todos los que llegaron hasta aquí.</linea>
+            </estrofa>
+            <estrofa numero="8">
+                <linea>Porque este tesoro...es para los Invencibles.</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
 </himnario>

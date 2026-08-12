@@ -1,1 +1,46 @@
-[]
+[
+    {
+        "label": "10 - DIOS TU NOMBRE EXALTARÉ",
+        "plantilla": "invencible",
+        "datos": {
+            "isHimno": true,
+            "params": {
+                "ver": "cantos_invencibles",
+                "num": "10"
+            }
+        }
+    },
+    {
+        "label": "7 - FE EN FUEGO",
+        "plantilla": "invencible",
+        "datos": {
+            "isHimno": true,
+            "params": {
+                "ver": "cantos_invencibles",
+                "num": "7"
+            }
+        }
+    },
+    {
+        "label": "16 - INVENCIBLES",
+        "plantilla": "invencible",
+        "datos": {
+            "isHimno": true,
+            "params": {
+                "ver": "cantos_invencibles",
+                "num": "16"
+            }
+        }
+    },
+    {
+        "label": "17 - GUION APERTURA",
+        "plantilla": "invencible",
+        "datos": {
+            "isHimno": true,
+            "params": {
+                "ver": "cantos_invencibles",
+                "num": "17"
+            }
+        }
+    }
+]

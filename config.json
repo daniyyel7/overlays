@@ -1,11 +1,21 @@
 {
+    "lower_invencibles": {
+        "plantilla": "invencible",
+        "datos": {
+            "v1": "José Luis Bouchot",
+            "v2": "Presidente de la Unión Mexicana de Chiapas",
+            "v3": "",
+            "v4": ""
+        },
+        "update": 1786569795000
+    },
     "cantos_invencibles": {
         "plantilla": "invencible",
         "datos": {
-            "v1": "Si por causa de tu fe te han abandonado,",
-            "v2": "Si por ser leal a Él,de ti se han burlado,",
+            "v1": "pastor hemos traído este tesoro.",
+            "v2": "",
             "tipo": "estrofa"
         },
-        "update": 1786472031909
+        "update": 1786570518724
     }
 }

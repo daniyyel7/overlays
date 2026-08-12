@@ -1,20 +1,10 @@
 [
     {
-        "label": "ASD",
+        "label": "José Luis Bouchot",
         "plantilla": "invencible",
         "datos": {
-            "v1": "ASD",
-            "v2": "23423",
-            "v3": "",
-            "v4": ""
-        }
-    },
-    {
-        "label": "ASD2",
-        "plantilla": "invencible",
-        "datos": {
-            "v1": "ASD2",
-            "v2": "23423",
+            "v1": "José Luis Bouchot",
+            "v2": "Presidente de la Unión Mexicana de Chiapas",
             "v3": "",
             "v4": ""
         }

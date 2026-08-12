@@ -940,4 +940,73 @@
             </estrofa>
         </estrofas>
     </himno>
+     <himno numero="16" titulo="INVENCIBLES">
+        <estrofas>
+            <estrofa numero="1">
+                <linea>En esta guerra entre el bien y el mal,</linea>
+                <linea>no estamos solos, Jesús con nosotros va;</linea>
+                <linea>no hay que temer ni dudar; ¡Conquistadores!:</linea>
+                <linea>La victoria en Él segura está.</linea>
+            </estrofa>
+            <estrofa numero="2">
+                <linea>Sigamos firmes hasta el final,</linea>
+                <linea>aunque suframos por causa de la verdad;</linea>
+                <linea>¡No nos rindamos jamás, Conquistadores!</linea>
+                <linea>que la gloria eterna es sin igual.</linea>
+            </estrofa>
+            <estrofa numero="3">
+                <linea>Si Dios es con nosotros, ¿quién nos podrá vencer?</linea>
+                <linea>Ésta es la victoria que vence al mundo, nuestra fe.</linea>
+            </estrofa>
+            <estrofa numero="4">
+              <linea>Invencibles, somos invencibles</linea>
+              <linea>en Jesús, solo en Jesús, quien venció.</linea>
+              <linea>Él pelea siempre por nosotros,</linea>
+              <linea>la batalla y la victoria son de Él.</linea>
+              <linea>Somos más que vencedores, </linea>
+              <linea>en Jesús, conquistadores.</linea>
+              <linea>¡Invencibles somos por la fe! </linea>
+            </estrofa>
+            <estrofa numero="5">
+               <linea>Anunciaré a mi generación,</linea>
+               <linea>este mensaje que arde en mi corazón:</linea>
+               <linea>que solo en Cristo Jesús hay esperanza,</linea>
+               <linea>paz eterna, gozo y salvación.</linea>
+            </estrofa>
+            <estrofa numero="6">
+                <linea>Vistamos la armadura del Señor,</linea>
+                <linea>con valentía alcemos hoy nuestra voz,</linea>
+                <linea>y si nos toca morir, por su Palabra,</linea>
+                <linea>lo veremos como un gran honor.</linea>
+            </estrofa>
+            <estrofa numero="7">
+                <linea>Si Dios es con nosotros, ¿quién nos podrá vencer?</linea>
+                <linea>Ésta es la victoria que vence al mundo, nuestra fe.</linea>
+            </estrofa>
+            <estrofa numero="8">
+                <linea>Invencibles, somos invencibles</linea>
+                <linea>en Jesús, solo en Jesús, quien venció.</linea>
+                <linea>Él pelea siempre por nosotros,</linea>
+                <linea>la batalla y la victoria son de Él.</linea>
+                <linea>Somos más que vencedores, </linea>
+                <linea>en Jesús, conquistadores.</linea>
+                <linea>¡Invencibles somos por la fe! </linea>
+            </estrofa>
+            <estrofa numero="9">
+               <linea>No volveremos atrás,</linea>
+               <linea>seremos siervos de Dios</linea>
+               <linea>y amigos de la humanidad.</linea>
+            </estrofa>
+            <estrofa numero="10">
+               <linea>Invencibles, somos invencibles</linea>
+               <linea>en Jesús, solo en Jesús, quien venció.</linea>
+               <linea>Él pelea siempre por nosotros,</linea>
+               <linea>la batalla y la victoria son de Él.</linea>
+               <linea>Somos más que vencedores, </linea>
+               <linea>en Jesús, conquistadores.</linea>
+               <linea>¡Invencibles somos por la fe! </linea>
+               <linea>¡Invencibles somos por la fe!</linea>
+            </estrofa>
+        </estrofas>
+    </himno>
 </himnario>

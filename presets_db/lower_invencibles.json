@@ -1,7 +1,17 @@
 [
     {
-        "label": "José Luis Bouchot",
+        "label": "José Luis Bouchot (Animado)",
         "plantilla": "invencible",
+        "datos": {
+            "v1": "José Luis Bouchot",
+            "v2": "Presidente de la Unión Mexicana de Chiapas",
+            "v3": "",
+            "v4": ""
+        }
+    },
+    {
+        "label": "José Luis Bouchot (Fijo PNG)",
+        "plantilla": "fijo",
         "datos": {
             "v1": "José Luis Bouchot",
             "v2": "Presidente de la Unión Mexicana de Chiapas",

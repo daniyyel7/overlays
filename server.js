@@ -162,7 +162,8 @@ app.get("/api/init", (req, res) => {
     "assets",
     "bible_versions",
     "estructuras",
-    "himnario_versions"
+    "himnario_versions",
+    "dist"
   ];
   const categories = fs
     .readdirSync(__dirname)

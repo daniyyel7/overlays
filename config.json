@@ -1,21 +1,12 @@
 {
     "lower_invencibles": {
-        "plantilla": "invencible",
+        "plantilla": "fijo",
         "datos": {
-            "v1": "José Luis Bouchot",
-            "v2": "Presidente de la Unión Mexicana de Chiapas",
+            "v1": "drdgfghjhlj",
+            "v2": "jkbjkbkjb",
             "v3": "",
             "v4": ""
         },
-        "update": 1786569795000
-    },
-    "cantos_invencibles": {
-        "plantilla": "invencible",
-        "datos": {
-            "v1": "pastor hemos traído este tesoro.",
-            "v2": "",
-            "tipo": "estrofa"
-        },
-        "update": 1786570518724
+        "update": 1786576597791
     }
 }

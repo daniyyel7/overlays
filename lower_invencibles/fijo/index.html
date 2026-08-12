@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Lower Invencible Fijo</title>
+<style>
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: transparent;
+}
+
+#lower-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Animación de entrada (fade in + slide), permanencia y salida (fade out) durante 10 segundos */
+#lower-wrap.animar {
+  animation: animacion10s 10s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Imagen fija del lower */
+#img-fija {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* ─── Bloque de textos ────────────────────────────────────────────
+   ⚠️ Ajustado a la misma posición y estilos que el lower animado
+   ────────────────────────────────────────────────────────────────*/
+#textos {
+  position: absolute;
+  left: 400px;
+  bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+/* Línea 1 — Nombre / título principal */
+#linea1 {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  white-space: nowrap;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.75);
+}
+
+/* Línea 2 — Cargo / subtítulo */
+#linea2 {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: #f5c842;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.75);
+}
+
+@keyframes animacion10s {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  4% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  94% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div id="lower-wrap">
+  <img id="img-fija" src="assets/fijo/imagen_fija.png" alt="Lower Fijo" />
+  <div id="textos">
+    <p id="linea1"></p>
+    <p id="linea2"></p>
+  </div>
+</div>
+
+<script>
+const lowerWrap = document.getElementById("lower-wrap");
+const elL1 = document.getElementById("linea1");
+const elL2 = document.getElementById("linea2");
+
+/* ════════════════════════════════════════════════════════════════
+   INTERFACE CON EL MOTOR PRINCIPAL (index.html)
+   ════════════════════════════════════════════════════════════════ */
+window.recibirDatos = function(datos) {
+  if (!datos || (!datos.v1 && !datos.v2)) {
+    lowerWrap.classList.remove("animar");
+    return;
+  }
+
+  // 1. Remover animación previa
+  lowerWrap.classList.remove("animar");
+
+  // 2. Actualizar textos
+  elL1.textContent = datos.v1 ?? "";
+  elL2.textContent = datos.v2 ?? "";
+
+  // 3. Forzar Reflow del DOM para reiniciar la animación CSS
+  void lowerWrap.offsetWidth;
+
+  // 4. Iniciar animación de 10 segundos
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      lowerWrap.classList.add("animar");
+    });
+  });
+};
+</script>
+
+</body>
+</html>

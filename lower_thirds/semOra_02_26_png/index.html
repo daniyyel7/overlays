@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Lower Third Formal</title>
+  <style>
+    /* FUENTE PERSONALIZADA */
+    @font-face {
+      font-family: 'AdventSans-Logo';
+      src: url("assets/AdventSans-Logo.otf") format("opentype");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+    }
+
+    /* === LOGO === */
+    .logo1 {
+      position: absolute;
+      width: 350px;
+      height: auto;
+      left: 58px;
+      top: 700px;
+      opacity: 0;
+      z-index: 10;
+    }
+
+    /*bage*/
+    .bage {
+      position: absolute;
+      border-radius: 150px;
+      width: 950px;
+      height: 55px;
+      left: 260px;
+      top: 850px;
+      opacity: 0;
+    }
+
+    .azul {
+      position: absolute;
+      border-radius: 150px;
+      width: 930px;
+      height: 55px;
+      left: 210px;
+      top: 905px;
+      opacity: 0;
+    }
+
+    /* === TEXTOS (Tamaños corregidos) === */
+    .texto-base {
+      position: absolute;
+      color: white;
+      font-family: 'AdventSans-Logo', sans-serif;
+      margin: 0;
+      opacity: 0;
+      white-space: nowrap;
+      font-style: italic;
+    }
+
+    #Texto1 {
+      left: 375px;
+      top: 850px;
+      width: 830px;
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    #texto2 {
+      left: 375px;
+      top: 920px;
+      width: 830px;
+      font-size: 20px;
+      font-weight: normal;
+    }
+
+    /* CLASES QUE ACTIVAN LAS ANIMACIONES */
+    .animar-logo { animation: formal-fade 15s ease-out forwards; }
+    .animar-bage { animation: ani-bage 14s cubic-bezier(0.25, 1, 0.5, 1) 0.1s forwards; }
+    .animar-azul { animation: ani-azul 14s cubic-bezier(0.25, 1, 0.5, 1) 0.1s forwards; }
+    .animar-texto { animation: formal-texto 12s cubic-bezier(0.25, 1, 0.5, 1) 1.6s forwards; }
+
+    /* === KEYFRAMES FORMALES === */
+    
+    @keyframes ani-bage {
+      0% { width: 0px; opacity: 0; }
+      12% { width: 910px; opacity: 1; }
+      92% { width: 910px; opacity: 1; }
+      100% { width: 0px; opacity: 0; }
+    }
+
+    @keyframes ani-azul {
+      0% { width: 0px; opacity: 0; }
+      12% { width: 900px; opacity: 1; }
+      92% { width: 900px; opacity: 1; }
+      100% { width: 0px; opacity: 0; }
+    }
+
+    @keyframes formal-fade {
+      0% { opacity: 0; }
+      7% { opacity: 1; }
+      93% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes formal-texto {
+      0% { opacity: 0; transform: translateX(-10px); }
+      10% { opacity: 1; transform: translateX(0); }
+      90% { opacity: 1; transform: translateX(0); }
+      100% { opacity: 0; transform: translateX(5px); }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <img src="assets/semana de oración.png" class="logo1">
+  <img src="assets/azul.jpeg" class="azul">
+  <img src="assets/bage.jpeg" class="bage">
+  <img id="imgLogo" src="assets/semana de oración.png" class="logo1"> 
+  <img id="imgAzul" src="assets/azul.jpeg" class="azul">
+  <img id="imgBage" src="assets/bage.jpeg" class="bage">
+  
+  <p id="Texto1" class="texto-base">Texto Principal</p>
+  <p id="texto2" class="texto-base">Subtexto Informativo</p>
+</div>
+
+<script>
+  let ultimoTimestamp = 0;
+
+  async function checkServer() {
+    try {
+      const res = await fetch("http://localhost:3000/textos");
+      const data = await res.json();
+
+      // Actualizar contenido de texto
+      if (data.texto1 && Texto1.textContent !== data.texto1) Texto1.textContent = data.texto1;
+      if (data.texto2 && texto2.textContent !== data.texto2) texto2.textContent = data.texto2;
+
+      // DISPARAR ANIMACIÓN si el timestamp cambió
+      if (data.timestamp && data.timestamp !== ultimoTimestamp) {
+        ultimoTimestamp = data.timestamp;
+        lanzar();
+      }
+    } catch (e) {}
+  }
+
+  function lanzar() {
+    const elementos = [
+      { id: 'imgLogo', clase: 'animar-logo' },
+      { id: 'imgAzul', clase: 'animar-azul' },
+      { id: 'imgBage', clase: 'animar-bage' },
+      { id: 'Texto1', clase: 'animar-texto' },
+      { id: 'texto2', clase: 'animar-texto' }
+    ];
+
+    elementos.forEach(item => {
+      const el = document.getElementById(item.id);
+      el.classList.remove(item.clase);
+      void el.offsetWidth; // Reset DOM
+      el.classList.add(item.clase);
+    });
+  }
+
+  setInterval(checkServer, 300);
+</script>
+</body>
+</html>

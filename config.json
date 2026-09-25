@@ -8,5 +8,24 @@
             "v4": ""
         },
         "update": 1786576597791
+    },
+    "lower_thirds": {
+        "plantilla": "semOra_26B",
+        "datos": {
+            "v1": "asasx",
+            "v2": "asdsad",
+            "v3": "",
+            "v4": ""
+        },
+        "update": 1790376055958
+    },
+    "himnarios": {
+        "plantilla": "semana_oracion_b",
+        "datos": {
+            "v1": "ahora y siempre, amén.",
+            "v2": "¡A Dios rindamos todo honor,",
+            "tipo": "estrofa"
+        },
+        "update": 1790376977035
     }
 }

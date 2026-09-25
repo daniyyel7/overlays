@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Lower Third - Semana Oración 26B</title>
+  <style>
+    @font-face {
+      font-family: 'AdventSans-Logo';
+      src: url("../semOra_02_26_png/assets/AdventSans-Logo.otf") format("opentype");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background: transparent;
+      font-family: 'AdventSans-Logo', sans-serif;
+    }
+
+    .lower-third {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 1920px;
+      height: 1080px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.1s ease, visibility 0.1s ease;
+    }
+
+    .lower-third.animar {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lt-bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      object-fit: contain;
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+
+    .lt-textos {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 1080px;
+      z-index: 10;
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+
+    .lt-titulo {
+      position: absolute;
+      left: 830px; /* Movido más a la derecha para salir del logo */
+      top: 919px;  /* Movido hacia abajo para caer dentro de la barra café */
+      width: 600px;
+      font-size: 40px;
+      font-weight: bold;
+      color: #ffffff;
+      font-family: 'AdventSans-Logo', Arial, sans-serif;
+      font-style: italic;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      line-height: 1.1;
+    }
+
+    .lt-subtitulo {
+      position: absolute;
+      left: 830px; /* Movido a la par del título principal */
+      top: 968px;  /* Movido hacia abajo para caer dentro de la barra azul */
+      width: 500px;
+      font-size: 26px;
+      font-weight: normal;
+      color: #ffffff;
+      font-family: 'AdventSans-Logo', Arial, sans-serif;
+      font-style: italic;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+      line-height: 1.1;
+    }
+
+    .animar .lt-bg { animation: cintillaAnim 14s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+    .animar .lt-textos { animation: textoAnim 14s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards; }
+
+    @keyframes cintillaAnim {
+      0% { opacity: 0; transform: translateX(-50px); }
+      10% { opacity: 1; transform: translateX(0); }
+      90% { opacity: 1; transform: translateX(0); }
+      100% { opacity: 0; transform: translateX(-50px); }
+    }
+
+    @keyframes textoAnim {
+      0% { opacity: 0; transform: translateX(-10px); }
+      8% { opacity: 1; transform: translateX(0); }
+      88% { opacity: 1; transform: translateX(0); }
+      100% { opacity: 0; transform: translateX(5px); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="lower-third" class="lower-third">
+  <img class="lt-bg" src="assets/cintilla.png" />
+  
+  <div class="lt-textos">
+    <p id="texto-principal" class="lt-titulo">Texto Principal</p>
+    <p id="texto-secundario" class="lt-subtitulo">Subtexto</p>
+  </div>
+</div>
+
+<script>
+window.recibirDatos = function(datos) {
+  const overlay = document.getElementById("lower-third");
+  
+  if (!datos.v1 && !datos.v2) {
+    overlay.classList.remove("animar");
+    return;
+  }
+
+  overlay.classList.remove("animar");
+  document.getElementById("texto-principal").textContent = datos.v1 || "";
+  document.getElementById("texto-secundario").textContent = datos.v2 || "";
+  
+  void overlay.offsetWidth;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.classList.add("animar");
+    });
+  });
+};
+</script>
+</body>
+</html>
